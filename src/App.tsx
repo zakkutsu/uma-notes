@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { UmaListPage } from './pages/UmaListPage';
 import { UmaDetailPage } from './pages/UmaDetailPage';
+import { SupportCardsPage } from './pages/SupportCardsPage';
 
 function App() {
   return (
@@ -14,8 +15,13 @@ function App() {
       <Route path="/uma" element={<UmaListPage />} />
 
       {/* Rute untuk Halaman Detail Uma */}
-      {/* ":id" adalah parameter dinamis, bisa berupa angka atau nama */}
       <Route path="/uma/:id" element={<UmaDetailPage />} />
+
+      {/* Rute untuk Halaman Support Cards */}
+      <Route path="/support-cards" element={<SupportCardsPage />} />
+
+      {/* Catch all route - redirect ke home */}
+      <Route path="*" element={<HomePage />} />
     </Routes>
   );
 }
