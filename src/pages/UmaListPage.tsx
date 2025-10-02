@@ -4,8 +4,7 @@ import { Header } from '../components/Header';
 import { SearchBar } from '../components/SearchBar';
 import { UmaCard } from '../components/UmaCard';
 import { FilterSidebar } from '../components/FilterSidebar';
-import { mockUmasData, type UmaFilters, type Uma } from '../data';
-import '../styles/responsive.css';
+import { mockUmasData, type UmaFilters, type Uma, type AptitudeRating } from '../data';
 
 // Helper function untuk filter Uma berdasarkan criteria
 const filterUmas = (umas: Uma[], filters: UmaFilters, searchTerm: string): Uma[] => {
@@ -26,8 +25,8 @@ const filterUmas = (umas: Uma[], filters: UmaFilters, searchTerm: string): Uma[]
     if (filters.aptitudes) {
       for (const [aptitudeType, selectedRatings] of Object.entries(filters.aptitudes)) {
         if (selectedRatings && selectedRatings.length > 0) {
-          const umaRating = uma[`${aptitudeType}_aptitude` as keyof Uma] as string;
-          if (!selectedRatings.includes(umaRating as any)) {
+          const umaRating = uma[`${aptitudeType}_aptitude` as keyof Uma] as AptitudeRating;
+          if (!selectedRatings.includes(umaRating)) {
             return false;
           }
         }
@@ -68,46 +67,31 @@ export const UmaListPage = () => {
   const activeFilterCount = getActiveFilterCount();
 
   return (
-    <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
+    <div className="min-h-screen bg-gray-50">
       <Header />
-      <main className="container" style={{ padding: '2rem 0' }}>
-        <div style={{ marginBottom: '2rem' }}>
-          <h2 style={{ 
-            marginBottom: '1rem', 
-            color: '#333',
-            fontSize: 'clamp(1.5rem, 4vw, 2rem)'
-          }}>Daftar Karakter Uma Musume</h2>
+      <main className="container py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">Daftar Karakter Uma Musume</h2>
           
-          <div className="search-container">
+          <div className="mb-4 sm:mb-6">
             <SearchBar onSearch={handleSearch} placeholder="Cari nama Uma Musume..." />
           </div>
           
           {/* Status bar */}
-          <div className="card" style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            padding: '1rem',
-            marginBottom: '1.5rem',
-            flexWrap: 'wrap',
-            gap: '1rem'
-          }}>
+          <div className="card p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4">
             <div>
-              <span style={{ fontWeight: 'bold', color: '#333', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>
+              <span className="font-bold text-gray-800 text-sm sm:text-base">
                 {filteredUmas.length} of {mockUmasData.length} Uma Musume
               </span>
               {searchTerm && (
-                <span style={{ marginLeft: '1rem', color: '#666', fontSize: 'clamp(0.8rem, 1.5vw, 0.9rem)' }}>
+                <span className="ml-4 text-gray-600 text-xs sm:text-sm">
                   searching for "{searchTerm}"
                 </span>
               )}
             </div>
             
             {activeFilterCount > 0 && (
-              <div className="filter-option active" style={{ 
-                padding: '0.5rem 1rem',
-                borderRadius: '20px'
-              }}>
+              <div className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-500 text-white rounded-full text-xs sm:text-sm font-medium">
                 {activeFilterCount} filter{activeFilterCount > 1 ? 's' : ''} active
               </div>
             )}
@@ -115,17 +99,15 @@ export const UmaListPage = () => {
         </div>
 
         {/* Layout utama dengan sidebar dan konten */}
-        <div className="layout-main">
-          <div className="sidebar">
-            <FilterSidebar 
-              filters={filters} 
-              onFilterChange={handleFilterChange}
-            />
-          </div>
+        <div className="flex flex-col lg:flex-row gap-6">
+          <FilterSidebar 
+            filters={filters} 
+            onFilterChange={handleFilterChange}
+          />
           
-          <div className="content-area">
+          <div className="flex-1">
             {filteredUmas.length > 0 ? (
-              <div className="grid-responsive">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-6">
                 {filteredUmas.map(uma => (
                   <UmaCard 
                     key={uma.id} 
@@ -134,13 +116,10 @@ export const UmaListPage = () => {
                 ))}
               </div>
             ) : (
-              <div className="card" style={{ 
-                textAlign: 'center', 
-                padding: 'clamp(2rem, 5vw, 4rem)'
-              }}>
-                <div style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', marginBottom: '1rem' }}>🔍</div>
-                <h3 style={{ color: '#666', marginBottom: '1rem', fontSize: 'clamp(1.2rem, 3vw, 1.5rem)' }}>No Uma Musume found</h3>
-                <p style={{ color: '#888', marginBottom: '1.5rem', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>
+              <div className="card text-center p-8 sm:p-12">
+                <div className="text-4xl sm:text-5xl lg:text-6xl mb-4">🔍</div>
+                <h3 className="text-gray-600 mb-4 text-lg sm:text-xl lg:text-2xl font-semibold">No Uma Musume found</h3>
+                <p className="text-gray-500 mb-6 text-sm sm:text-base">
                   Try adjusting your search terms or filters to find what you're looking for.
                 </p>
                 <button
@@ -148,7 +127,7 @@ export const UmaListPage = () => {
                     setFilters({});
                     setSearchTerm('');
                   }}
-                  className="btn btn-primary"
+                  className="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors duration-200"
                 >
                   Clear all filters
                 </button>

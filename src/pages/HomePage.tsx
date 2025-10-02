@@ -5,7 +5,6 @@ import { SearchBar } from '../components/SearchBar';
 import { UmaCard } from '../components/UmaCard';
 import { SupportCardCard } from '../components/SupportCardCard';
 import { mockUmasData, mockSupportCards } from '../data';
-import '../styles/responsive.css';
 
 export const HomePage = () => {
   const navigate = useNavigate();
@@ -24,47 +23,53 @@ export const HomePage = () => {
   const featuredSupportCards = mockSupportCards.filter(card => card.rarity === 'SSR').slice(0, 3);
 
   return (
-    <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
+    <div className="min-h-screen bg-gray-50">
       <Header />
       
       {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1 className="hero-title">
+      <section className="bg-gradient-to-br from-uma-blue to-uma-purple text-white py-12 sm:py-16 lg:py-20">
+        <div className="container text-center">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-shadow">
             🐎 Uma Notes Database
           </h1>
-          <p className="hero-subtitle">
+          <p className="text-lg sm:text-xl lg:text-2xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
             Temukan semua informasi tentang karakter Uma Musume favoritmu. 
             Database lengkap dengan stats, skills, aptitude, dan support cards.
           </p>
           
-          <div style={{ maxWidth: '500px', margin: '0 auto' }}>
+          <div className="mb-8">
             <SearchBar 
               onSearch={handleSearch} 
               placeholder="Cari Uma Musume atau Support Card..."
             />
           </div>
           
-          <div className="hero-actions">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <Link 
               to="/uma" 
-              className="btn btn-primary"
-              style={{
-                backgroundColor: '#fff',
-                color: '#667eea',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
-              }}
+              className="
+                inline-block px-6 py-3 sm:px-8 sm:py-4
+                bg-white text-uma-blue 
+                rounded-xl font-semibold text-lg
+                shadow-lg hover:shadow-xl
+                transition-all duration-200
+                hover:scale-105
+                no-underline
+              "
             >
               🐎 Browse Uma Musume
             </Link>
             <Link 
               to="/support-cards" 
-              className="btn"
-              style={{
-                backgroundColor: 'rgba(255,255,255,0.2)',
-                color: '#fff',
-                border: '2px solid rgba(255,255,255,0.3)'
-              }}
+              className="
+                inline-block px-6 py-3 sm:px-8 sm:py-4
+                bg-white/20 text-white border-2 border-white/30
+                rounded-xl font-semibold text-lg
+                backdrop-blur-sm
+                hover:bg-white/30 hover:border-white/50
+                transition-all duration-200
+                no-underline
+              "
             >
               🃏 Support Cards
             </Link>
@@ -72,38 +77,22 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <main className="container" style={{ padding: '2rem 0' }}>
+      <main className="container py-8 sm:py-12">
         {/* Featured Uma Section */}
-        <section style={{ marginBottom: '4rem' }}>
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            marginBottom: '2rem',
-            flexWrap: 'wrap',
-            gap: '1rem'
-          }}>
-            <h2 style={{ 
-              fontSize: 'clamp(1.5rem, 4vw, 2rem)', 
-              color: '#333',
-              margin: '0'
-            }}>
+        <section className="mb-12 sm:mb-16">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 gap-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
               ⭐ Featured Uma Musume
             </h2>
             <Link 
               to="/uma" 
-              style={{ 
-                color: '#007bff', 
-                textDecoration: 'none',
-                fontSize: 'clamp(1rem, 2vw, 1.1rem)',
-                fontWeight: '500'
-              }}
+              className="text-blue-500 hover:text-blue-600 text-lg font-medium transition-colors no-underline"
             >
               View All →
             </Link>
           </div>
           
-          <div className="grid-responsive">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {featuredUmas.map(uma => (
               <UmaCard key={uma.id} {...uma} />
             ))}
@@ -111,36 +100,20 @@ export const HomePage = () => {
         </section>
 
         {/* Featured Support Cards Section */}
-        <section style={{ marginBottom: '4rem' }}>
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            marginBottom: '2rem',
-            flexWrap: 'wrap',
-            gap: '1rem'
-          }}>
-            <h2 style={{ 
-              fontSize: 'clamp(1.5rem, 4vw, 2rem)', 
-              color: '#333',
-              margin: '0'
-            }}>
+        <section className="mb-12 sm:mb-16">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 gap-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
               🃏 Featured Support Cards
             </h2>
             <Link 
               to="/support-cards" 
-              style={{ 
-                color: '#007bff', 
-                textDecoration: 'none',
-                fontSize: 'clamp(1rem, 2vw, 1.1rem)',
-                fontWeight: '500'
-              }}
+              className="text-blue-500 hover:text-blue-600 text-lg font-medium transition-colors no-underline"
             >
               View All →
             </Link>
           </div>
           
-          <div className="grid-support-cards">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {featuredSupportCards.map(card => (
               <SupportCardCard key={card.id} {...card} />
             ))}
@@ -148,81 +121,46 @@ export const HomePage = () => {
         </section>
 
         {/* Quick Stats Section */}
-        <section className="card" style={{ textAlign: 'center', padding: '2rem' }}>
-          <h2 style={{ 
-            fontSize: 'clamp(1.5rem, 4vw, 2rem)', 
-            color: '#333',
-            marginBottom: '2rem'
-          }}>
+        <section className="card text-center p-6 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 sm:mb-8">
             📊 Database Statistics
           </h2>
           
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', 
-            gap: 'clamp(1rem, 3vw, 2rem)',
-            marginTop: '2rem'
-          }}>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mt-6 sm:mt-8">
             <div>
-              <div style={{ 
-                fontSize: 'clamp(2rem, 6vw, 3rem)', 
-                fontWeight: 'bold', 
-                color: '#007bff',
-                marginBottom: '0.5rem'
-              }}>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-500 mb-2">
                 {mockUmasData.length}
               </div>
-              <div style={{ color: '#666', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)' }}>Uma Musume</div>
+              <div className="text-gray-600 text-sm sm:text-base lg:text-lg">Uma Musume</div>
             </div>
             
             <div>
-              <div style={{ 
-                fontSize: 'clamp(2rem, 6vw, 3rem)', 
-                fontWeight: 'bold', 
-                color: '#28a745',
-                marginBottom: '0.5rem'
-              }}>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-500 mb-2">
                 {mockSupportCards.length}
               </div>
-              <div style={{ color: '#666', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)' }}>Support Cards</div>
+              <div className="text-gray-600 text-sm sm:text-base lg:text-lg">Support Cards</div>
             </div>
             
             <div>
-              <div style={{ 
-                fontSize: 'clamp(2rem, 6vw, 3rem)', 
-                fontWeight: 'bold', 
-                color: '#ffc107',
-                marginBottom: '0.5rem'
-              }}>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-yellow-500 mb-2">
                 15
               </div>
-              <div style={{ color: '#666', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)' }}>Aptitude Types</div>
+              <div className="text-gray-600 text-sm sm:text-base lg:text-lg">Aptitude Types</div>
             </div>
             
             <div>
-              <div style={{ 
-                fontSize: 'clamp(2rem, 6vw, 3rem)', 
-                fontWeight: 'bold', 
-                color: '#dc3545',
-                marginBottom: '0.5rem'
-              }}>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-red-500 mb-2">
                 ∞
               </div>
-              <div style={{ color: '#666', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)' }}>Possibilities</div>
+              <div className="text-gray-600 text-sm sm:text-base lg:text-lg">Possibilities</div>
             </div>
           </div>
         </section>
       </main>
       
       {/* Footer */}
-      <footer style={{ 
-        backgroundColor: '#343a40',
-        color: '#fff',
-        padding: '2rem',
-        textAlign: 'center',
-        marginTop: '4rem'
-      }}>
-        <p style={{ margin: 0, opacity: 0.8 }}>
+      <footer className="bg-gray-800 text-white py-8 text-center mt-12 sm:mt-16">
+        <p className="text-gray-300">
           © 2025 Uma Notes Database. Data structures based on improved ERD design.
         </p>
       </footer>

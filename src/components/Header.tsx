@@ -1,7 +1,6 @@
 // src/components/Header.tsx
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../styles/responsive.css';
 
 export const Header = () => {
   const location = useLocation();
@@ -20,39 +19,40 @@ export const Header = () => {
   };
 
   return (
-    <header className="header">
-      <div className="header-content">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Link 
-            to="/" 
-            style={{ 
-              textDecoration: 'none', 
-              fontSize: 'clamp(1.2rem, 3vw, 1.5rem)', 
-              fontWeight: 'bold',
-              color: '#007bff'
-            }}
-          >
-            🐎 Uma Notes
-          </Link>
-        </div>
-        
-        <nav className="nav-menu">
-          {navLinks.map(link => (
+    <header className="sticky top-0 z-50 bg-white shadow-md">
+      <div className="container">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 gap-4">
+          {/* Logo */}
+          <div className="flex justify-center sm:justify-start">
             <Link 
-              key={link.to}
-              to={link.to} 
-              className={`btn ${isActiveLink(link.to) ? 'btn-primary' : ''}`}
-              style={{
-                backgroundColor: isActiveLink(link.to) ? '#007bff' : 'transparent',
-                color: isActiveLink(link.to) ? '#fff' : '#333',
-                border: `1px solid ${isActiveLink(link.to) ? '#007bff' : 'transparent'}`,
-                fontSize: 'clamp(0.8rem, 2vw, 1rem)'
-              }}
+              to="/" 
+              className="text-xl sm:text-2xl font-bold text-blue-500 hover:text-blue-600 transition-colors no-underline"
             >
-              {link.icon} {link.label}
+              🐎 Uma Notes
             </Link>
-          ))}
-        </nav>
+          </div>
+          
+          {/* Navigation Menu */}
+          <nav className="flex flex-wrap justify-center sm:justify-end gap-2">
+            {navLinks.map(link => (
+              <Link 
+                key={link.to}
+                to={link.to} 
+                className={`
+                  px-3 py-2 sm:px-4 sm:py-2 rounded-lg font-medium text-sm sm:text-base
+                  transition-all duration-200 no-underline
+                  ${isActiveLink(link.to) 
+                    ? 'bg-blue-500 text-white' 
+                    : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                  }
+                `}
+              >
+                <span className="sm:hidden">{link.icon}</span>
+                <span className="hidden sm:inline">{link.icon} {link.label}</span>
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   );

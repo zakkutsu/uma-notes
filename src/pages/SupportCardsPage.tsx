@@ -39,6 +39,7 @@ const SupportCardFilterSidebar = ({
   filters: SupportCardFilters;
   onFilterChange: (filters: SupportCardFilters) => void;
 }) => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const rarityOptions = ['SSR', 'SR', 'R'] as const;
   const cardTypeOptions = ['Speed', 'Stamina', 'Power', 'Guts', 'Wit', 'Friend', 'Group'] as const;
 
@@ -71,94 +72,89 @@ const SupportCardFilterSidebar = ({
   };
 
   return (
-    <aside style={{ 
-      width: '250px', 
-      paddingRight: '1rem', 
-      backgroundColor: '#f8f9fa', 
-      padding: '1rem', 
-      borderRadius: '8px',
-      height: 'fit-content'
-    }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-        <h3 style={{ margin: 0 }}>Filters</h3>
-        <button 
-          onClick={clearAllFilters}
-          style={{ 
-            padding: '0.25rem 0.5rem', 
-            fontSize: '0.8em', 
-            backgroundColor: '#dc3545',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer'
-          }}
-        >
-          Clear All
-        </button>
-      </div>
-      
-      {/* Rarity Filter */}
-      <div style={{ marginBottom: '1.5rem' }}>
-        <h4 style={{ marginTop: 0, marginBottom: '0.5rem', borderBottom: '1px solid #ddd', paddingBottom: '0.25rem' }}>
-          Rarity
-        </h4>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-          {rarityOptions.map(rarity => (
-            <label 
-              key={rarity}
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                cursor: 'pointer',
-                padding: '0.5rem 1rem',
-                border: '1px solid #ddd',
-                borderRadius: '6px',
-                backgroundColor: (filters.rarity || []).includes(rarity) ? '#007bff' : '#fff',
-                color: (filters.rarity || []).includes(rarity) ? '#fff' : '#333',
-                fontWeight: 'bold'
-              }}
+    <aside className="w-full lg:w-72 lg:flex-shrink-0">
+      <div className="bg-gray-50 rounded-xl p-4 sticky top-20">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-bold text-gray-800">Filters</h3>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={clearAllFilters}
+              className="px-3 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-200"
             >
-              <input 
-                type="checkbox"
-                checked={(filters.rarity || []).includes(rarity)}
-                onChange={() => handleRarityToggle(rarity)}
-                style={{ display: 'none' }}
-              />
-              {rarity}
-            </label>
-          ))}
+              Clear All
+            </button>
+            <button
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              className="lg:hidden p-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+              aria-label={isCollapsed ? "Expand filters" : "Collapse filters"}
+            >
+              {isCollapsed ? '▼' : '▲'}
+            </button>
+          </div>
         </div>
-      </div>
-      
-      {/* Card Type Filter */}
-      <div style={{ marginBottom: '1.5rem' }}>
-        <h4 style={{ marginTop: 0, marginBottom: '0.5rem', borderBottom: '1px solid #ddd', paddingBottom: '0.25rem' }}>
-          Card Type
-        </h4>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          {cardTypeOptions.map(cardType => (
-            <label 
-              key={cardType}
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                cursor: 'pointer',
-                padding: '0.5rem',
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                backgroundColor: (filters.card_type || []).includes(cardType) ? '#007bff' : '#fff',
-                color: (filters.card_type || []).includes(cardType) ? '#fff' : '#333'
-              }}
-            >
-              <input 
-                type="checkbox"
-                checked={(filters.card_type || []).includes(cardType)}
-                onChange={() => handleCardTypeToggle(cardType)}
-                style={{ display: 'none' }}
-              />
-              {cardType}
-            </label>
-          ))}
+        
+        <div className={`${isCollapsed ? 'hidden' : 'block'} lg:block space-y-6`}>
+          {/* Rarity Filter */}
+          <div>
+            <h4 className="text-sm font-semibold mb-2 text-gray-700 border-b border-gray-200 pb-1">
+              Rarity
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {rarityOptions.map(rarity => (
+                <label 
+                  key={rarity}
+                  className={`
+                    inline-flex items-center cursor-pointer
+                    px-3 py-2 text-sm font-bold rounded
+                    border transition-all duration-200
+                    ${(filters.rarity || []).includes(rarity)
+                      ? 'bg-blue-500 text-white border-blue-500'
+                      : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    }
+                  `}
+                >
+                  <input 
+                    type="checkbox"
+                    checked={(filters.rarity || []).includes(rarity)}
+                    onChange={() => handleRarityToggle(rarity)}
+                    className="sr-only"
+                  />
+                  {rarity}
+                </label>
+              ))}
+            </div>
+          </div>
+          
+          {/* Card Type Filter */}
+          <div>
+            <h4 className="text-sm font-semibold mb-2 text-gray-700 border-b border-gray-200 pb-1">
+              Card Type
+            </h4>
+            <div className="flex flex-col gap-2">
+              {cardTypeOptions.map(cardType => (
+                <label 
+                  key={cardType}
+                  className={`
+                    inline-flex items-center cursor-pointer
+                    px-3 py-2 text-sm rounded
+                    border transition-all duration-200
+                    ${(filters.card_type || []).includes(cardType)
+                      ? 'bg-blue-500 text-white border-blue-500'
+                      : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    }
+                  `}
+                >
+                  <input 
+                    type="checkbox"
+                    checked={(filters.card_type || []).includes(cardType)}
+                    onChange={() => handleCardTypeToggle(cardType)}
+                    className="sr-only"
+                  />
+                  {cardType}
+                </label>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </aside>
@@ -192,46 +188,31 @@ export const SupportCardsPage = () => {
   const activeFilterCount = getActiveFilterCount();
 
   return (
-    <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
+    <div className="min-h-screen bg-gray-50">
       <Header />
-      <main style={{ padding: '2rem', maxWidth: '1400px', margin: '0 auto' }}>
-        <div style={{ marginBottom: '2rem' }}>
-          <h2 style={{ marginBottom: '1rem', color: '#333' }}>Support Cards</h2>
+      <main className="container py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">Support Cards</h2>
           
-          <div style={{ marginBottom: '1rem' }}>
+          <div className="mb-4 sm:mb-6">
             <SearchBar onSearch={handleSearch} placeholder="Cari nama Support Card..." />
           </div>
           
           {/* Status bar */}
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            padding: '1rem',
-            backgroundColor: '#fff',
-            borderRadius: '8px',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-            marginBottom: '1.5rem'
-          }}>
+          <div className="card p-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4">
             <div>
-              <span style={{ fontWeight: 'bold', color: '#333' }}>
+              <span className="font-bold text-gray-800 text-sm sm:text-base">
                 {filteredCards.length} of {mockSupportCards.length} Support Cards
               </span>
               {searchTerm && (
-                <span style={{ marginLeft: '1rem', color: '#666' }}>
+                <span className="ml-4 text-gray-600 text-xs sm:text-sm">
                   searching for "{searchTerm}"
                 </span>
               )}
             </div>
             
             {activeFilterCount > 0 && (
-              <div style={{ 
-                backgroundColor: '#007bff',
-                color: '#fff',
-                padding: '0.5rem 1rem',
-                borderRadius: '20px',
-                fontSize: '0.9em'
-              }}>
+              <div className="px-3 py-1 sm:px-4 sm:py-2 bg-blue-500 text-white rounded-full text-xs sm:text-sm font-medium">
                 {activeFilterCount} filter{activeFilterCount > 1 ? 's' : ''} active
               </div>
             )}
@@ -239,19 +220,15 @@ export const SupportCardsPage = () => {
         </div>
 
         {/* Layout utama dengan sidebar dan konten */}
-        <div style={{ display: 'flex', gap: '2rem' }}>
+        <div className="flex flex-col lg:flex-row gap-6">
           <SupportCardFilterSidebar 
             filters={filters} 
             onFilterChange={handleFilterChange}
           />
           
-          <div style={{ flex: 1 }}>
+          <div className="flex-1">
             {filteredCards.length > 0 ? (
-              <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', 
-                gap: '1.5rem'
-              }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-6">
                 {filteredCards.map(card => (
                   <SupportCardCard 
                     key={card.id} 
@@ -260,16 +237,10 @@ export const SupportCardsPage = () => {
                 ))}
               </div>
             ) : (
-              <div style={{ 
-                textAlign: 'center', 
-                padding: '4rem 2rem',
-                backgroundColor: '#fff',
-                borderRadius: '8px',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-              }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🃏</div>
-                <h3 style={{ color: '#666', marginBottom: '1rem' }}>No Support Cards found</h3>
-                <p style={{ color: '#888', marginBottom: '1.5rem' }}>
+              <div className="card text-center p-8 sm:p-12">
+                <div className="text-4xl sm:text-5xl lg:text-6xl mb-4">🃏</div>
+                <h3 className="text-gray-600 mb-4 text-lg sm:text-xl lg:text-2xl font-semibold">No Support Cards found</h3>
+                <p className="text-gray-500 mb-6 text-sm sm:text-base">
                   Try adjusting your search terms or filters to find what you're looking for.
                 </p>
                 <button
@@ -277,15 +248,7 @@ export const SupportCardsPage = () => {
                     setFilters({});
                     setSearchTerm('');
                   }}
-                  style={{
-                    padding: '0.75rem 2rem',
-                    backgroundColor: '#007bff',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    fontSize: '1rem'
-                  }}
+                  className="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors duration-200"
                 >
                   Clear all filters
                 </button>

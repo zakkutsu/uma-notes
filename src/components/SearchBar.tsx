@@ -1,6 +1,5 @@
 // src/components/SearchBar.tsx
 import { useState } from 'react';
-import '../styles/responsive.css';
 
 interface SearchBarProps {
   onSearch: (searchTerm: string) => void;
@@ -23,32 +22,57 @@ export const SearchBar = ({ onSearch, placeholder = "Cari nama karakter..." }: S
   };
 
   return (
-    <form onSubmit={handleSubmit} className="search-container">
-      <input 
-        type="text" 
-        value={searchTerm}
-        onChange={handleInputChange}
-        placeholder={placeholder}
-        className="search-input"
-      />
-      <button 
-        type="submit"
-        className="btn btn-primary"
-      >
-        Cari
-      </button>
-      {searchTerm && (
+    <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto">
+      <div className="flex flex-col sm:flex-row gap-2">
+        <div className="relative flex-1">
+          <input 
+            type="text" 
+            value={searchTerm}
+            onChange={handleInputChange}
+            placeholder={placeholder}
+            className="
+              w-full px-4 py-3 
+              border border-gray-300 rounded-lg 
+              focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+              text-base
+              placeholder-gray-500
+              transition-all duration-200
+            "
+          />
+          {searchTerm && (
+            <button 
+              type="button"
+              onClick={() => {
+                setSearchTerm('');
+                onSearch('');
+              }}
+              className="
+                absolute right-3 top-1/2 transform -translate-y-1/2
+                text-gray-400 hover:text-gray-600 
+                transition-colors duration-200
+              "
+              aria-label="Clear search"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+        
         <button 
-          type="button"
-          onClick={() => {
-            setSearchTerm('');
-            onSearch('');
-          }}
-          className="btn btn-secondary"
+          type="submit"
+          className="
+            px-6 py-3 
+            bg-blue-500 text-white 
+            rounded-lg font-medium
+            hover:bg-blue-600 
+            transition-colors duration-200
+            whitespace-nowrap
+            min-w-[80px]
+          "
         >
-          Clear
+          Cari
         </button>
-      )}
+      </div>
     </form>
   );
 };

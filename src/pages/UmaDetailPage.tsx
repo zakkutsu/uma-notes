@@ -145,130 +145,74 @@ export const UmaDetailPage = () => {
   ];
 
   return (
-    <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
+    <div className="min-h-screen bg-gray-50">
       <Header />
       
-      <main style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
+      <main className="container py-6 sm:py-8 max-w-6xl">
         {/* Navigation */}
-        <div style={{ marginBottom: '2rem' }}>
-          <Link to="/uma" style={{ 
-            color: '#007bff', 
-            textDecoration: 'none',
-            fontSize: '1rem'
-          }}>
+        <div className="mb-6 sm:mb-8">
+          <Link to="/uma" className="text-blue-500 hover:text-blue-600 transition-colors no-underline text-sm sm:text-base">
             ← Back to Uma List
           </Link>
         </div>
 
         {/* Header Section */}
-        <section style={{ 
-          backgroundColor: '#fff', 
-          borderRadius: '12px', 
-          padding: '2rem',
-          marginBottom: '2rem',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-        }}>
-          <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-            <div style={{ flexShrink: 0 }}>
+        <section className="card p-6 sm:p-8 mb-6 sm:mb-8">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+            <div className="flex-shrink-0 mx-auto lg:mx-0">
               <img 
                 src={uma.imageUrl || 'https://via.placeholder.com/200x300'} 
                 alt={uma.name}
-                style={{ 
-                  width: '200px', 
-                  height: '300px',
-                  objectFit: 'cover',
-                  borderRadius: '12px',
-                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
-                }}
+                className="w-48 h-72 sm:w-52 sm:h-80 object-cover rounded-xl shadow-lg"
               />
             </div>
             
-            <div style={{ flex: 1 }}>
-              <h1 style={{ 
-                fontSize: '2.5rem', 
-                marginBottom: '0.5rem',
-                color: '#333'
-              }}>
+            <div className="flex-1 text-center lg:text-left">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-gray-800">
                 {uma.name}
               </h1>
               
-              <div style={{ marginBottom: '1rem' }}>
-                <span style={{ 
-                  fontSize: '1.2rem', 
-                  color: '#666',
-                  backgroundColor: '#e9ecef',
-                  padding: '0.5rem 1rem',
-                  borderRadius: '20px'
-                }}>
+              <div className="mb-6">
+                <span className="inline-block px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-lg font-medium">
                   ⭐ {uma.star_initial} Star
                 </span>
               </div>
               
               {uma.description && (
-                <p style={{ 
-                  fontSize: '1.1rem', 
-                  color: '#666',
-                  lineHeight: '1.6',
-                  marginBottom: '1.5rem'
-                }}>
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-6">
                   {uma.description}
                 </p>
               )}
               
               {/* Quick Stats Preview */}
-              <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
-                gap: '1rem',
-                marginTop: '1.5rem'
-              }}>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '0.8em', color: '#666' }}>Speed</div>
-                  <div style={{ 
-                    fontSize: '1.5em', 
-                    fontWeight: 'bold',
-                    color: getAptitudeColor(uma.speed_aptitude)
-                  }}>
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">
+                <div className="text-center">
+                  <div className="text-xs text-gray-500 mb-1">Speed</div>
+                  <div className="text-xl sm:text-2xl font-bold" style={{ color: getAptitudeColor(uma.speed_aptitude) }}>
                     {uma.speed_aptitude}
                   </div>
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '0.8em', color: '#666' }}>Stamina</div>
-                  <div style={{ 
-                    fontSize: '1.5em', 
-                    fontWeight: 'bold',
-                    color: getAptitudeColor(uma.stamina_aptitude)
-                  }}>
+                <div className="text-center">
+                  <div className="text-xs text-gray-500 mb-1">Stamina</div>
+                  <div className="text-xl sm:text-2xl font-bold" style={{ color: getAptitudeColor(uma.stamina_aptitude) }}>
                     {uma.stamina_aptitude}
                   </div>
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '0.8em', color: '#666' }}>Power</div>
-                  <div style={{ 
-                    fontSize: '1.5em', 
-                    fontWeight: 'bold',
-                    color: getAptitudeColor(uma.power_aptitude)
-                  }}>
+                <div className="text-center">
+                  <div className="text-xs text-gray-500 mb-1">Power</div>
+                  <div className="text-xl sm:text-2xl font-bold" style={{ color: getAptitudeColor(uma.power_aptitude) }}>
                     {uma.power_aptitude}
                   </div>
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '0.8em', color: '#666' }}>Guts</div>
-                  <div style={{ 
-                    fontSize: '1.5em', 
-                    fontWeight: 'bold',
-                    color: getAptitudeColor(uma.guts_aptitude)
-                  }}>
+                <div className="text-center">
+                  <div className="text-xs text-gray-500 mb-1">Guts</div>
+                  <div className="text-xl sm:text-2xl font-bold" style={{ color: getAptitudeColor(uma.guts_aptitude) }}>
                     {uma.guts_aptitude}
                   </div>
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '0.8em', color: '#666' }}>Wit</div>
-                  <div style={{ 
-                    fontSize: '1.5em', 
-                    fontWeight: 'bold',
-                    color: getAptitudeColor(uma.wit_aptitude)
-                  }}>
+                <div className="text-center">
+                  <div className="text-xs text-gray-500 mb-1">Wit</div>
+                  <div className="text-xl sm:text-2xl font-bold" style={{ color: getAptitudeColor(uma.wit_aptitude) }}>
                     {uma.wit_aptitude}
                   </div>
                 </div>
