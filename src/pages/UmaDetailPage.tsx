@@ -1,46 +1,18 @@
 // src/pages/UmaDetailPage.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { getUmaById, getUmaSkills, getSkillById, type Skill } from '../data';
 
-// Helper function untuk warna aptitude (sama seperti di UmaCard)
-const getAptitudeColor = (rating: string) => {
-  const colors: Record<string, string> = {
-    'S': '#ff6b6b', 'A': '#4ecdc4', 'B': '#45b7d1', 'C': '#96c93d',
-    'D': '#feca57', 'E': '#ff9ff3', 'F': '#ff7675', 'G': '#ddd'
-  };
-  return colors[rating] || '#ddd';
-};
+// Helper function removed - using Tailwind aptitude classes instead
 
 // Component untuk menampilkan aptitude dengan visual yang menarik
 const AptitudeDisplay = ({ label, rating }: { label: string; rating: string }) => (
-  <div style={{ 
-    display: 'flex', 
-    alignItems: 'center', 
-    marginBottom: '0.5rem',
-    padding: '0.5rem',
-    backgroundColor: '#f8f9fa',
-    borderRadius: '6px'
-  }}>
-    <span style={{ 
-      width: '120px', 
-      fontWeight: 'bold',
-      fontSize: '0.9em'
-    }}>
+  <div className="flex items-center mb-2 p-2 bg-gray-50 rounded-lg">
+    <span className="w-32 font-bold text-sm">
       {label}
     </span>
-    <span style={{ 
-      display: 'inline-block',
-      padding: '0.25rem 0.75rem',
-      backgroundColor: getAptitudeColor(rating),
-      color: rating === 'G' || rating === 'F' ? '#666' : '#fff',
-      borderRadius: '20px',
-      fontWeight: 'bold',
-      fontSize: '1.1em',
-      minWidth: '40px',
-      textAlign: 'center'
-    }}>
+    <span className={`inline-block py-1 px-3 rounded-full font-bold text-lg min-w-[40px] text-center text-white aptitude-${rating.toLowerCase()}-bg`}>
       {rating}
     </span>
   </div>
@@ -49,12 +21,12 @@ const AptitudeDisplay = ({ label, rating }: { label: string; rating: string }) =
 // Component untuk menampilkan skill
 const SkillDisplay = ({ skill, category }: { skill: Skill; category: string }) => {
   const categoryColors: Record<string, string> = {
-    'unique': '#ff6b6b',
-    'initial': '#4ecdc4', 
-    'awakening_lv2': '#45b7d1',
-    'awakening_lv3': '#96c93d',
-    'awakening_lv4': '#feca57',
-    'awakening_lv5': '#ff9ff3'
+    'unique': 'bg-red-500',
+    'initial': 'bg-teal-500', 
+    'awakening_lv2': 'bg-blue-500',
+    'awakening_lv3': 'bg-green-500',
+    'awakening_lv4': 'bg-yellow-500',
+    'awakening_lv5': 'bg-pink-500'
   };
 
   const categoryLabels: Record<string, string> = {
@@ -66,46 +38,34 @@ const SkillDisplay = ({ skill, category }: { skill: Skill; category: string }) =
     'awakening_lv5': '覚醒Lv5'
   };
 
+  const rarityColors: Record<string, string> = {
+    'Unique': 'bg-red-500',
+    'Rare': 'bg-yellow-500',
+    'Normal': 'bg-gray-500'
+  };
+
   return (
-    <div style={{
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      padding: '1rem',
-      marginBottom: '1rem',
-      backgroundColor: '#fff'
-    }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-        <h4 style={{ margin: 0, color: '#333' }}>{skill.skill_name}</h4>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <span style={{
-            padding: '0.25rem 0.5rem',
-            backgroundColor: categoryColors[category] || '#6c757d',
-            color: '#fff',
-            borderRadius: '12px',
-            fontSize: '0.8em',
-            fontWeight: 'bold'
-          }}>
+    <div className="border border-gray-200 rounded-lg p-4 mb-4 bg-white">
+      <div className="flex justify-between items-start mb-2">
+        <h4 className="m-0 text-gray-800 font-semibold">{skill.skill_name}</h4>
+        <div className="flex gap-2">
+          <span className={`px-2 py-1 text-white rounded-xl text-xs font-bold ${
+            categoryColors[category] || 'bg-gray-500'
+          }`}>
             {categoryLabels[category] || category}
           </span>
-          <span style={{
-            padding: '0.25rem 0.5rem',
-            backgroundColor: skill.skill_rarity === 'Unique' ? '#dc3545' : skill.skill_rarity === 'Rare' ? '#ffc107' : '#6c757d',
-            color: '#fff',
-            borderRadius: '12px',
-            fontSize: '0.8em'
-          }}>
+          <span className={`px-2 py-1 text-white rounded-xl text-xs ${
+            rarityColors[skill.skill_rarity] || 'bg-gray-500'
+          }`}>
             {skill.skill_rarity}
           </span>
         </div>
       </div>
-      <p style={{ 
-        margin: '0.5rem 0 0 0', 
-        color: '#666',
-        lineHeight: '1.4',
-        fontSize: '0.9em'
-      }} dangerouslySetInnerHTML={{ __html: skill.skill_effect }}>
-      </p>
-      <div style={{ marginTop: '0.5rem', fontSize: '0.8em', color: '#888' }}>
+      <p 
+        className="mt-2 mb-0 text-gray-600 leading-relaxed text-sm"
+        dangerouslySetInnerHTML={{ __html: skill.skill_effect }}
+      />
+      <div className="mt-2 text-xs text-gray-500">
         Type: {skill.skill_type}
       </div>
     </div>
@@ -120,11 +80,11 @@ export const UmaDetailPage = () => {
   
   if (!uma) {
     return (
-      <div>
+      <div className="min-h-screen bg-gray-50">
         <Header />
-        <main style={{ padding: '2rem', textAlign: 'center' }}>
-          <h2>Uma not found</h2>
-          <Link to="/uma" style={{ color: '#007bff', textDecoration: 'none' }}>
+        <main className="container py-8 text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Uma not found</h2>
+          <Link to="/uma" className="text-blue-500 hover:text-blue-600 no-underline">
             ← Back to Uma List
           </Link>
         </main>
@@ -188,31 +148,31 @@ export const UmaDetailPage = () => {
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">
                 <div className="text-center">
                   <div className="text-xs text-gray-500 mb-1">Speed</div>
-                  <div className="text-xl sm:text-2xl font-bold" style={{ color: getAptitudeColor(uma.speed_aptitude) }}>
+                  <div className={`text-xl sm:text-2xl font-bold aptitude-${uma.speed_aptitude.toLowerCase()}`}>
                     {uma.speed_aptitude}
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-gray-500 mb-1">Stamina</div>
-                  <div className="text-xl sm:text-2xl font-bold" style={{ color: getAptitudeColor(uma.stamina_aptitude) }}>
+                  <div className={`text-xl sm:text-2xl font-bold aptitude-${uma.stamina_aptitude.toLowerCase()}`}>
                     {uma.stamina_aptitude}
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-gray-500 mb-1">Power</div>
-                  <div className="text-xl sm:text-2xl font-bold" style={{ color: getAptitudeColor(uma.power_aptitude) }}>
+                  <div className={`text-xl sm:text-2xl font-bold aptitude-${uma.power_aptitude.toLowerCase()}`}>
                     {uma.power_aptitude}
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-gray-500 mb-1">Guts</div>
-                  <div className="text-xl sm:text-2xl font-bold" style={{ color: getAptitudeColor(uma.guts_aptitude) }}>
+                  <div className={`text-xl sm:text-2xl font-bold aptitude-${uma.guts_aptitude.toLowerCase()}`}>
                     {uma.guts_aptitude}
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-gray-500 mb-1">Wit</div>
-                  <div className="text-xl sm:text-2xl font-bold" style={{ color: getAptitudeColor(uma.wit_aptitude) }}>
+                  <div className={`text-xl sm:text-2xl font-bold aptitude-${uma.wit_aptitude.toLowerCase()}`}>
                     {uma.wit_aptitude}
                   </div>
                 </div>
@@ -222,28 +182,19 @@ export const UmaDetailPage = () => {
         </section>
 
         {/* Tab Navigation */}
-        <div style={{ 
-          display: 'flex', 
-          backgroundColor: '#fff',
-          borderRadius: '8px 8px 0 0',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
-        }}>
+        <div className="flex bg-white rounded-t-lg shadow-md">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              style={{
-                flex: 1,
-                padding: '1rem 2rem',
-                border: 'none',
-                backgroundColor: activeTab === tab.id ? '#007bff' : 'transparent',
-                color: activeTab === tab.id ? '#fff' : '#666',
-                borderRadius: activeTab === tab.id ? '8px 8px 0 0' : '0',
-                cursor: 'pointer',
-                fontSize: '1rem',
-                fontWeight: 'bold',
-                transition: 'all 0.2s'
-              }}
+              className={`
+                flex-1 px-4 py-4 sm:px-8 font-bold text-base transition-all duration-200
+                ${
+                  activeTab === tab.id 
+                    ? 'bg-blue-500 text-white rounded-t-lg' 
+                    : 'bg-transparent text-gray-600 hover:text-gray-800'
+                }
+              `}
             >
               {tab.icon} {tab.label}
             </button>
@@ -251,19 +202,14 @@ export const UmaDetailPage = () => {
         </div>
 
         {/* Tab Content */}
-        <section style={{ 
-          backgroundColor: '#fff', 
-          borderRadius: '0 0 8px 8px',
-          padding: '2rem',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-        }}>
+        <section className="bg-white rounded-b-lg p-8 shadow-lg">
           {activeTab === 'overview' && (
             <div>
-              <h3 style={{ marginBottom: '1.5rem', color: '#333' }}>Aptitudes Overview</h3>
+              <h3 className="mb-6 text-gray-800 text-xl font-bold">Aptitudes Overview</h3>
               
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
                 <div>
-                  <h4 style={{ marginBottom: '1rem', color: '#007bff' }}>Base Stats</h4>
+                  <h4 className="mb-4 text-blue-500 text-lg font-semibold">Base Stats</h4>
                   <AptitudeDisplay label="Speed (スピード)" rating={uma.speed_aptitude} />
                   <AptitudeDisplay label="Stamina (スタミナ)" rating={uma.stamina_aptitude} />
                   <AptitudeDisplay label="Power (パワー)" rating={uma.power_aptitude} />
@@ -272,11 +218,11 @@ export const UmaDetailPage = () => {
                 </div>
                 
                 <div>
-                  <h4 style={{ marginBottom: '1rem', color: '#007bff' }}>Surface</h4>
+                  <h4 className="mb-4 text-blue-500 text-lg font-semibold">Surface</h4>
                   <AptitudeDisplay label="Turf (芝)" rating={uma.turf_aptitude} />
                   <AptitudeDisplay label="Dirt (ダート)" rating={uma.dirt_aptitude} />
                   
-                  <h4 style={{ marginTop: '1.5rem', marginBottom: '1rem', color: '#007bff' }}>Distance</h4>
+                  <h4 className="mt-6 mb-4 text-blue-500 text-lg font-semibold">Distance</h4>
                   <AptitudeDisplay label="Sprint (短距離)" rating={uma.sprint_aptitude} />
                   <AptitudeDisplay label="Mile (マイル)" rating={uma.mile_aptitude} />
                   <AptitudeDisplay label="Medium (中距離)" rating={uma.medium_aptitude} />
@@ -284,7 +230,7 @@ export const UmaDetailPage = () => {
                 </div>
                 
                 <div>
-                  <h4 style={{ marginBottom: '1rem', color: '#007bff' }}>Strategy</h4>
+                  <h4 className="mb-4 text-blue-500 text-lg font-semibold">Strategy</h4>
                   <AptitudeDisplay label="Runner (逃げ)" rating={uma.runner_aptitude} />
                   <AptitudeDisplay label="Leader (先行)" rating={uma.leader_aptitude} />
                   <AptitudeDisplay label="Betweener (差し)" rating={uma.betweener_aptitude} />
@@ -296,12 +242,12 @@ export const UmaDetailPage = () => {
 
           {activeTab === 'skills' && (
             <div>
-              <h3 style={{ marginBottom: '1.5rem', color: '#333' }}>
+              <h3 className="mb-6 text-gray-800 text-xl font-bold">
                 Skills ({skillsWithDetails.length})
               </h3>
               
               {skillsWithDetails.length > 0 ? (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1rem' }}>
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                   {skillsWithDetails.map(item => (
                     <SkillDisplay 
                       key={`${item.uma_id}-${item.skill_id}-${item.skill_category}`}
@@ -311,7 +257,7 @@ export const UmaDetailPage = () => {
                   ))}
                 </div>
               ) : (
-                <p style={{ color: '#666', textAlign: 'center', padding: '2rem' }}>
+                <p className="text-gray-500 text-center py-8">
                   No skills data available
                 </p>
               )}
@@ -320,16 +266,11 @@ export const UmaDetailPage = () => {
 
           {activeTab === 'stats' && (
             <div>
-              <h3 style={{ marginBottom: '1.5rem', color: '#333' }}>Detailed Statistics</h3>
+              <h3 className="mb-6 text-gray-800 text-xl font-bold">Detailed Statistics</h3>
               
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
-                <div style={{ 
-                  padding: '1.5rem', 
-                  backgroundColor: '#f8f9fa', 
-                  borderRadius: '8px',
-                  border: '1px solid #dee2e6'
-                }}>
-                  <h4 style={{ color: '#007bff', marginBottom: '1rem' }}>Best Distances</h4>
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                <div className="p-6 bg-gray-50 rounded-lg border border-gray-200">
+                  <h4 className="text-blue-500 mb-4 text-lg font-semibold">Best Distances</h4>
                   {[
                     { label: 'Sprint', rating: uma.sprint_aptitude },
                     { label: 'Mile', rating: uma.mile_aptitude },
@@ -339,26 +280,17 @@ export const UmaDetailPage = () => {
                     .sort((a, b) => a.rating.localeCompare(b.rating))
                     .slice(0, 2)
                     .map(item => (
-                      <div key={item.label} style={{ marginBottom: '0.5rem' }}>
-                        <span style={{ fontWeight: 'bold' }}>{item.label}</span>: 
-                        <span style={{ 
-                          marginLeft: '0.5rem',
-                          color: getAptitudeColor(item.rating),
-                          fontWeight: 'bold'
-                        }}>
+                      <div key={item.label} className="mb-2">
+                        <span className="font-bold">{item.label}</span>: 
+                        <span className={`ml-2 aptitude-${item.rating.toLowerCase()} font-bold`}>
                           {item.rating}
                         </span>
                       </div>
                     ))}
                 </div>
                 
-                <div style={{ 
-                  padding: '1.5rem', 
-                  backgroundColor: '#f8f9fa', 
-                  borderRadius: '8px',
-                  border: '1px solid #dee2e6'
-                }}>
-                  <h4 style={{ color: '#007bff', marginBottom: '1rem' }}>Best Strategies</h4>
+                <div className="p-6 bg-gray-50 rounded-lg border border-gray-200">
+                  <h4 className="text-blue-500 mb-4 text-lg font-semibold">Best Strategies</h4>
                   {[
                     { label: 'Runner', rating: uma.runner_aptitude },
                     { label: 'Leader', rating: uma.leader_aptitude },
@@ -368,43 +300,26 @@ export const UmaDetailPage = () => {
                     .sort((a, b) => a.rating.localeCompare(b.rating))
                     .slice(0, 2)
                     .map(item => (
-                      <div key={item.label} style={{ marginBottom: '0.5rem' }}>
-                        <span style={{ fontWeight: 'bold' }}>{item.label}</span>: 
-                        <span style={{ 
-                          marginLeft: '0.5rem',
-                          color: getAptitudeColor(item.rating),
-                          fontWeight: 'bold'
-                        }}>
+                      <div key={item.label} className="mb-2">
+                        <span className="font-bold">{item.label}</span>: 
+                        <span className={`ml-2 aptitude-${item.rating.toLowerCase()} font-bold`}>
                           {item.rating}
                         </span>
                       </div>
                     ))}
                 </div>
                 
-                <div style={{ 
-                  padding: '1.5rem', 
-                  backgroundColor: '#f8f9fa', 
-                  borderRadius: '8px',
-                  border: '1px solid #dee2e6'
-                }}>
-                  <h4 style={{ color: '#007bff', marginBottom: '1rem' }}>Surface Preference</h4>
-                  <div style={{ marginBottom: '0.5rem' }}>
-                    <span style={{ fontWeight: 'bold' }}>Turf</span>: 
-                    <span style={{ 
-                      marginLeft: '0.5rem',
-                      color: getAptitudeColor(uma.turf_aptitude),
-                      fontWeight: 'bold'
-                    }}>
+                <div className="p-6 bg-gray-50 rounded-lg border border-gray-200">
+                  <h4 className="text-blue-500 mb-4 text-lg font-semibold">Surface Preference</h4>
+                  <div className="mb-2">
+                    <span className="font-bold">Turf</span>: 
+                    <span className={`ml-2 aptitude-${uma.turf_aptitude.toLowerCase()} font-bold`}>
                       {uma.turf_aptitude}
                     </span>
                   </div>
                   <div>
-                    <span style={{ fontWeight: 'bold' }}>Dirt</span>: 
-                    <span style={{ 
-                      marginLeft: '0.5rem',
-                      color: getAptitudeColor(uma.dirt_aptitude),
-                      fontWeight: 'bold'
-                    }}>
+                    <span className="font-bold">Dirt</span>: 
+                    <span className={`ml-2 aptitude-${uma.dirt_aptitude.toLowerCase()} font-bold`}>
                       {uma.dirt_aptitude}
                     </span>
                   </div>

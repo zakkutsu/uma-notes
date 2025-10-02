@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -19,15 +17,26 @@ body {
   background-color: #f8f9fa;
 }
 
-/* Aptitude color utilities */
-.aptitude-s { color: #ff6b6b; }
-.aptitude-a { color: #4ecdc4; }
-.aptitude-b { color: #45b7d1; }
-.aptitude-c { color: #96c93d; }
-.aptitude-d { color: #feca57; }
-.aptitude-e { color: #ff9ff3; }
-.aptitude-f { color: #ff7675; }
-.aptitude-g { color: #ddd; }
+/* Aptitude Color Classes */
+@reference {
+  .aptitude-s { @apply text-red-500; }
+  .aptitude-a { @apply text-yellow-500; }
+  .aptitude-b { @apply text-pink-400; }
+  .aptitude-c { @apply text-blue-500; }
+  .aptitude-d { @apply text-purple-600; }
+  .aptitude-e { @apply text-gray-500; }
+  .aptitude-f { @apply text-gray-500; }
+  .aptitude-g { @apply text-gray-500; }
+
+  .aptitude-s-bg { @apply bg-red-500; }
+  .aptitude-a-bg { @apply bg-yellow-500; }
+  .aptitude-b-bg { @apply bg-pink-400; }
+  .aptitude-c-bg { @apply bg-blue-500; }
+  .aptitude-d-bg { @apply bg-purple-600; }
+  .aptitude-e-bg { @apply bg-gray-500; }
+  .aptitude-f-bg { @apply bg-gray-500; }
+  .aptitude-g-bg { @apply bg-gray-500; }
+}
 
 .line-clamp-2 {
   display: -webkit-box;
