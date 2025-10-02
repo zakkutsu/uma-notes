@@ -1,35 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import { MainLayout } from './layout';
+import { HomePage, ProgressTrackerPage } from './pages';
+import { getAppId } from './utils';
+import type { Page } from './types';
+// import { onAuthStateChanged, User } from 'firebase/auth'; // Uncomment when Firebase is installed
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [activeNav, setActiveNav] = useState<string>('Home');
+  const [activeProgressNav, setActiveProgressNav] = useState<string>('Your Uma');
+  const [scrollTarget, setScrollTarget] = useState<string | null>(null);
+  
+  useEffect(() => {
+    // Firebase initialization will be added later when needed
+    console.log('App initialized with appId:', getAppId());
+  }, []);
 
+  const navigateTo = (page: Page, targetId?: string) => {
+    if (page === 'home' && targetId) {
+      setScrollTarget(targetId);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    if (page === 'progress') {
+      setActiveNav('');
+    } else {
+      setActiveNav('Home');
+    }
+    
+    setCurrentPage(page);
+  };
+
+  useEffect(() => {
+    if (currentPage === 'home' && scrollTarget) {
+      setTimeout(() => {
+        const element = document.getElementById(scrollTarget);
+        const headerEl = document.querySelector('header');
+        if (element && headerEl) {
+          const headerHeight = headerEl.offsetHeight;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 16;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+        setScrollTarget(null);
+      }, 100);
+    }
+  }, [currentPage, scrollTarget]);
+
+  const headerProps = {
+    onNavigate: navigateTo,
+    activeNav,
+    setActiveNav,
+    activeProgressNav,
+    setActiveProgressNav,
+    currentPage
+  };
+  
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <MainLayout headerProps={headerProps}>
+      {currentPage === 'home' ? (
+        <HomePage onNavigate={navigateTo} setActiveNav={setActiveNav} />
+      ) : (
+        <ProgressTrackerPage onNavigate={navigateTo} setActiveProgressNav={setActiveProgressNav} />
+      )}
+    </MainLayout>
+  );
 }
-
-export default App
