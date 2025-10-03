@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { UmaCard, SupportCardCard, SkillCard, FactorCard } from '../components';
+import { UmaCard, SupportCardCard, SkillCard, FactorCard, SearchBar } from '../components';
 import { 
   featuredUmas, 
   featuredSupportCards, 
@@ -28,8 +28,8 @@ export const ProgressTrackerPage: React.FC<ProgressPageProps> = ({ onNavigate, s
   }, [setActiveProgressNav]);
   
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <section className="bg-gradient-to-br from-gray-800 to-gray-900 text-white py-12 sm:py-16 lg:py-20">
+    <>
+      <section id="progress-home-section" className="bg-gradient-to-br from-uma-blue to-uma-purple text-white py-12 sm:py-16 lg:py-20">
         <div className="container text-center">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-shadow">
             🐎 Your Collection
@@ -37,6 +37,9 @@ export const ProgressTrackerPage: React.FC<ProgressPageProps> = ({ onNavigate, s
           <p className="text-lg sm:text-xl lg:text-2xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
             Kelola dan lacak semua progres Uma Musume, Support Card, dan item lainnya yang telah Anda kumpulkan.
           </p>
+          <div className="mb-8">
+            <SearchBar onSearch={() => {}} placeholder="Cari Uma Musume atau Support Card di koleksi Anda..." />
+          </div>
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <button 
               onClick={() => onNavigate('home')} 
@@ -119,7 +122,57 @@ export const ProgressTrackerPage: React.FC<ProgressPageProps> = ({ onNavigate, s
             {featuredFactors.map(factor => <FactorCard key={factor.id} {...factor} />)}
           </div>
         </section>
+        
+        <section id="database-section" className="mb-12 sm:mb-16">
+          <div className="card text-center p-6 sm:p-8">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 sm:mb-8">
+              📊 Your Collection Statistics
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8 mt-6 sm:mt-8">
+              <div>
+                <div className="text-3xl sm:text-4xl font-bold text-blue-500 mb-2">
+                  {featuredUmas.length}
+                </div>
+                <div className="text-gray-600 text-sm sm:text-base">Uma Musume Owned</div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-bold text-green-500 mb-2">
+                  {featuredSupportCards.length}
+                </div>
+                <div className="text-gray-600 text-sm sm:text-base">Support Cards</div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-bold text-purple-500 mb-2">
+                  {featuredSkills.length}
+                </div>
+                <div className="text-gray-600 text-sm sm:text-base">Skills Unlocked</div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-bold text-pink-500 mb-2">
+                  {featuredFactors.length}
+                </div>
+                <div className="text-gray-600 text-sm sm:text-base">Factors Collected</div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-bold text-yellow-500 mb-2">85%</div>
+                <div className="text-gray-600 text-sm sm:text-base">Collection Rate</div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-bold text-red-500 mb-2">12</div>
+                <div className="text-gray-600 text-sm sm:text-base">Races Won</div>
+              </div>
+            </div>
+            <div className="mt-8">
+              <button 
+                onClick={() => onNavigate('home')}
+                className="bg-gradient-to-r from-blue-500 to-fuchsia-600 text-white px-6 py-3 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+              >
+                🔍 Explore Full Database
+              </button>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
+    </>
   );
 };
