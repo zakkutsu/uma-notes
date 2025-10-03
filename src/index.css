@@ -1,59 +1,102 @@
 @import "tailwindcss";
 
+/* Uma Notes Global Styles */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --uma-blue: #3b82f6;
+  --uma-purple: #8b5cf6;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #f8f9fa;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #f9fafb;
+  color: #111827;
 }
 
-/* Aptitude Color Classes */
-@reference {
-  .aptitude-s { @apply text-red-500; }
-  .aptitude-a { @apply text-yellow-500; }
-  .aptitude-b { @apply text-pink-400; }
-  .aptitude-c { @apply text-blue-500; }
-  .aptitude-d { @apply text-purple-600; }
-  .aptitude-e { @apply text-gray-500; }
-  .aptitude-f { @apply text-gray-500; }
-  .aptitude-g { @apply text-gray-500; }
-
-  .aptitude-s-bg { @apply bg-red-500; }
-  .aptitude-a-bg { @apply bg-yellow-500; }
-  .aptitude-b-bg { @apply bg-pink-400; }
-  .aptitude-c-bg { @apply bg-blue-500; }
-  .aptitude-d-bg { @apply bg-purple-600; }
-  .aptitude-e-bg { @apply bg-gray-500; }
-  .aptitude-f-bg { @apply bg-gray-500; }
-  .aptitude-g-bg { @apply bg-gray-500; }
+/* Container utility */
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
+/* Text shadow utility */
 .text-shadow {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Card utilities */
+.card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+}
+
+.card-hover-effect {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.card-hover-effect:hover {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  transform: translateY(-0.5rem);
+}
+
+/* Tag background colors */
+.bg-speed-tag { background-color: #ef4444; }
+.bg-stamina-tag { background-color: #f97316; }
+.bg-power-tag { background-color: #eab308; }
+.bg-guts-tag { background-color: #84cc16; }
+.bg-intellect-tag { background-color: #22c55e; }
+.bg-friend-tag { background-color: #3b82f6; }
+.bg-unique-tag { background-color: #a855f7; }
+
+/* Uma brand colors */
+.bg-uma-blue { background-color: var(--uma-blue); }
+.bg-uma-purple { background-color: var(--uma-purple); }
+.text-uma-blue { color: var(--uma-blue); }
+
+/* Gradient utilities */
+.from-uma-blue {
+  --tw-gradient-from: var(--uma-blue);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0));
+}
+
+.to-uma-purple {
+  --tw-gradient-to: var(--uma-purple);
+}
+
+/* Button action utility */
+.btn-action {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+}
+
+.btn-action:active {
+  transform: scale(0.95);
 }

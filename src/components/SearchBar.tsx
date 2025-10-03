@@ -1,78 +1,27 @@
-// src/components/SearchBar.tsx
-import { useState } from 'react';
+import React from 'react';
+import type { SearchBarProps } from '../types';
 
-interface SearchBarProps {
-  onSearch: (searchTerm: string) => void;
-  placeholder?: string;
-}
-
-export const SearchBar = ({ onSearch, placeholder = "Cari nama karakter..." }: SearchBarProps) => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSearch(searchTerm);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    // Real-time search saat user mengetik
-    onSearch(value);
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto">
-      <div className="flex flex-col sm:flex-row gap-2">
-        <div className="relative flex-1">
-          <input 
-            type="text" 
-            value={searchTerm}
-            onChange={handleInputChange}
-            placeholder={placeholder}
-            className="
-              w-full px-4 py-3 
-              border border-gray-300 rounded-lg 
-              focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-              text-base
-              placeholder-gray-500
-              transition-all duration-200
-            "
-          />
-          {searchTerm && (
-            <button 
-              type="button"
-              onClick={() => {
-                setSearchTerm('');
-                onSearch('');
-              }}
-              className="
-                absolute right-3 top-1/2 transform -translate-y-1/2
-                text-gray-400 hover:text-gray-600 
-                transition-colors duration-200
-              "
-              aria-label="Clear search"
-            >
-              ✕
-            </button>
-          )}
-        </div>
-        
-        <button 
-          type="submit"
-          className="
-            px-6 py-3 
-            bg-blue-500 text-white 
-            rounded-lg font-medium
-            hover:bg-blue-600 
-            transition-colors duration-200
-            whitespace-nowrap
-            min-w-[80px]
-          "
-        >
-          Cari
-        </button>
-      </div>
-    </form>
-  );
-};
+export const SearchBar: React.FC<SearchBarProps> = ({ placeholder, onSearch }) => (
+  <div className="relative max-w-2xl mx-auto">
+    <input 
+      type="search" 
+      placeholder={placeholder} 
+      className="w-full px-6 py-4 rounded-full bg-white text-gray-800 text-lg shadow-lg border border-gray-200 focus:outline-none focus:ring-4 focus:ring-white/50 focus:border-blue-300" 
+      onChange={(e) => onSearch(e.target.value)} 
+    />
+    <svg 
+      className="absolute right-6 top-1/2 -translate-y-1/2 h-6 w-6 text-gray-400" 
+      xmlns="http://www.w3.org/2000/svg" 
+      fill="none" 
+      viewBox="0 0 24 24" 
+      stroke="currentColor"
+    >
+      <path 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        strokeWidth="2" 
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+      />
+    </svg>
+  </div>
+);
