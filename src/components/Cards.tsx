@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Uma, SupportCard, Skill, Factor } from '../types';
+import type { Uma, SupportCard, Skill, Factor, TrainedUma } from '../types';
 
 export const UmaCard: React.FC<Uma> = ({ name, rarity, imgUrl }) => (
   <div className="card-hover-effect group">
@@ -74,3 +74,71 @@ export const FactorCard: React.FC<Factor> = ({ name, stars, type }) => (
     </span>
   </div>
 );
+
+export const TrainedUmaCard: React.FC<TrainedUma> = ({ name, rarity, imgUrl, level, stats, rank }) => {
+  const getRankColor = (rank: string) => {
+    switch (rank) {
+      case 'SS': return 'text-purple-600 bg-purple-100';
+      case 'S': return 'text-red-600 bg-red-100';
+      case 'A': return 'text-orange-600 bg-orange-100';
+      case 'B': return 'text-yellow-600 bg-yellow-100';
+      case 'C': return 'text-green-600 bg-green-100';
+      default: return 'text-gray-600 bg-gray-100';
+    }
+  };
+
+  const getStatColor = (value: number) => {
+    if (value >= 1200) return 'text-red-600';
+    if (value >= 1000) return 'text-orange-600';
+    if (value >= 800) return 'text-yellow-600';
+    return 'text-gray-600';
+  };
+
+  return (
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-200 hover:scale-105">
+      <div className="relative">
+        <img 
+          src={imgUrl} 
+          alt={name} 
+          className="w-full h-48 object-cover"
+        />
+        <div className="absolute top-2 left-2 flex items-center gap-1">
+          {[...Array(rarity)].map((_, i) => (
+            <span key={i} className="text-yellow-400 text-lg">⭐</span>
+          ))}
+        </div>
+        <div className={`absolute top-2 right-2 px-3 py-1 rounded-full text-sm font-bold ${getRankColor(rank)}`}>
+          {rank}
+        </div>
+        <div className="absolute bottom-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
+          Lv.{level}
+        </div>
+      </div>
+      <div className="p-4">
+        <h3 className="font-bold text-lg text-gray-800 mb-2">{name}</h3>
+        <div className="space-y-1 text-xs">
+          <div className="flex justify-between">
+            <span className="text-gray-600">Speed:</span>
+            <span className={`font-semibold ${getStatColor(stats.speed)}`}>{stats.speed}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">Stamina:</span>
+            <span className={`font-semibold ${getStatColor(stats.stamina)}`}>{stats.stamina}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">Power:</span>
+            <span className={`font-semibold ${getStatColor(stats.power)}`}>{stats.power}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">Guts:</span>
+            <span className={`font-semibold ${getStatColor(stats.guts)}`}>{stats.guts}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">Intellect:</span>
+            <span className={`font-semibold ${getStatColor(stats.intellect)}`}>{stats.intellect}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

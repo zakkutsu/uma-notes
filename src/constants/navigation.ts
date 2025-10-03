@@ -13,7 +13,6 @@ export const progressSectionIdToNavMap: { [key: string]: string } = {
   'progress-home-section': 'Home',
   'your-uma': 'Your Uma',
   'your-support-cards': 'Your Support Cards',
-  'your-skills': 'Your Skills',
-  'your-factors': 'Your Factors',
+  'trained-uma': 'Trained Uma',
   'database-section': 'Database'
 };

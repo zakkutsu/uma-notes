@@ -1,36 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { SearchBar, UmaCard, SupportCardCard, SkillCard, FactorCard, AddItemModal } from '../components';
+import { SearchBar, UmaCard, SupportCardCard, TrainedUmaCard, AddItemModal } from '../components';
 import { 
   featuredUmas, 
   featuredSupportCards, 
-  featuredSkills, 
-  featuredFactors,
-  progressSectionIdToNavMap 
+  featuredTrainedUmas
 } from '../constants';
-import type { ProgressPageProps, Uma, SupportCard, Skill, Factor } from '../types';
+import { progressSectionIdToNavMap } from '../constants/navigation';
+import type { ProgressPageProps, Uma, SupportCard, TrainedUma } from '../types';
 
 interface ProgressTrackerPageProps extends ProgressPageProps {
-  onViewAll: (type: 'uma' | 'support-card' | 'skill' | 'factor', items: (Uma | SupportCard | Skill | Factor)[]) => void;
+  onViewAll: (type: 'uma' | 'support-card' | 'trained-uma', items: (Uma | SupportCard | TrainedUma)[]) => void;
 }
 
 export const ProgressTrackerPage: React.FC<ProgressTrackerPageProps> = ({ onNavigate, setActiveProgressNav, onViewAll }) => {
   // User collections state
   const [userUmas, setUserUmas] = useState<Uma[]>(featuredUmas);
   const [userSupportCards, setUserSupportCards] = useState<SupportCard[]>(featuredSupportCards);
-  const [userSkills, setUserSkills] = useState<Skill[]>(featuredSkills);
-  const [userFactors, setUserFactors] = useState<Factor[]>(featuredFactors);
+  const [userTrainedUmas, setUserTrainedUmas] = useState<TrainedUma[]>(featuredTrainedUmas);
   
   // Modal state for Add functionality
-  const [addModal, setAddModal] = useState<{ isOpen: boolean; type: 'uma' | 'support-card' | 'skill' | 'factor' | null }>({
+  const [addModal, setAddModal] = useState<{ isOpen: boolean; type: 'uma' | 'support-card' | 'trained-uma' | null }>({
     isOpen: false,
     type: null
   });
 
-  const handleViewAll = (type: 'uma' | 'support-card' | 'skill' | 'factor', items: (Uma | SupportCard | Skill | Factor)[]) => {
+  const handleViewAll = (type: 'uma' | 'support-card' | 'trained-uma', items: (Uma | SupportCard | TrainedUma)[]) => {
     onViewAll(type, items);
   };
 
-  const handleAddItem = (item: { id: number; name?: string; rarity?: number; imgUrl?: string; type?: string; icon?: string; description?: string; stars?: number }) => {
+  const handleAddItem = (item: { id: number; name?: string; rarity?: number; imgUrl?: string; type?: string; icon?: string; description?: string; stars?: number; level?: number; stats?: TrainedUma['stats']; rank?: string }) => {
     if (addModal.type === 'uma' && item.name && typeof item.rarity === 'number' && item.imgUrl) {
       const newUma: Uma = {
         id: item.id,
@@ -47,23 +45,17 @@ export const ProgressTrackerPage: React.FC<ProgressTrackerPageProps> = ({ onNavi
         imgUrl: item.imgUrl
       };
       setUserSupportCards(prev => [...prev, newSupportCard]);
-    } else if (addModal.type === 'skill' && item.name && item.icon && item.description) {
-      const newSkill: Skill = {
+    } else if (addModal.type === 'trained-uma' && item.name && typeof item.rarity === 'number' && item.imgUrl && item.level && item.stats && item.rank) {
+      const newTrainedUma: TrainedUma = {
         id: item.id,
         name: item.name,
-        icon: item.icon as Skill['icon'],
-        description: item.description,
-        imageUrl: item.imgUrl
+        rarity: item.rarity,
+        imgUrl: item.imgUrl,
+        level: item.level,
+        stats: item.stats,
+        rank: item.rank as TrainedUma['rank']
       };
-      setUserSkills(prev => [...prev, newSkill]);
-    } else if (addModal.type === 'factor' && item.name && typeof item.stars === 'number' && item.type) {
-      const newFactor: Factor = {
-        id: item.id,
-        name: item.name,
-        stars: item.stars,
-        type: item.type as Factor['type']
-      };
-      setUserFactors(prev => [...prev, newFactor]);
+      setUserTrainedUmas(prev => [...prev, newTrainedUma]);
     }
     
     setAddModal({ isOpen: false, type: null });
@@ -139,12 +131,8 @@ export const ProgressTrackerPage: React.FC<ProgressTrackerPageProps> = ({ onNavi
               <div className="text-gray-600">Support Cards</div>
             </div>
             <div className="text-center bg-white p-6 rounded-2xl shadow-lg">
-              <div className="text-3xl font-bold text-uma-gold mb-2">{userSkills.length}</div>
-              <div className="text-gray-600">Skills</div>
-            </div>
-            <div className="text-center bg-white p-6 rounded-2xl shadow-lg">
-              <div className="text-3xl font-bold text-green-600 mb-2">{userFactors.length}</div>
-              <div className="text-gray-600">Factors</div>
+              <div className="text-3xl font-bold text-uma-gold mb-2">{userTrainedUmas.length}</div>
+              <div className="text-gray-600">Trained Uma</div>
             </div>
           </div>
         </div>
@@ -244,94 +232,47 @@ export const ProgressTrackerPage: React.FC<ProgressTrackerPageProps> = ({ onNavi
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="your-skills" className="py-16 bg-white">
+      {/* Trained Uma Section */}
+      <section id="trained-uma" className="py-16 bg-white">
         <div className="container">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-3">
-                ✨ Your Skills
+                🏆 Trained Uma Musume
               </h2>
               <p className="text-gray-600 text-lg">
-                Skill khusus yang telah dipelajari Uma Musume Anda ({userSkills.length} total)
+                Uma Musume yang telah Anda latih dengan level dan stats tinggi ({userTrainedUmas.length} total)
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <button 
-                onClick={() => handleViewAll('skill', userSkills)}
-                className="px-6 py-3 bg-uma-gold text-uma-blue rounded-xl font-semibold hover:bg-uma-gold/90 transition-all duration-200"
+                onClick={() => handleViewAll('trained-uma', userTrainedUmas)}
+                className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-200"
               >
-                View All ({userSkills.length})
+                View All ({userTrainedUmas.length})
               </button>
               <button 
-                onClick={() => setAddModal({ isOpen: true, type: 'skill' })}
+                onClick={() => setAddModal({ isOpen: true, type: 'trained-uma' })}
                 className="px-6 py-3 bg-uma-gold text-uma-blue border-2 border-uma-gold rounded-xl font-semibold hover:bg-uma-gold/90 transition-all duration-200"
               >
-                ✨ Add New Skill
+                � Add Trained Uma
               </button>
             </div>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {userSkills.slice(0, 8).map((skill) => (
-              <SkillCard key={skill.id} {...skill} />
+            {userTrainedUmas.slice(0, 8).map((trainedUma) => (
+              <TrainedUmaCard key={trainedUma.id} {...trainedUma} />
             ))}
           </div>
           
-          {userSkills.length > 8 && (
+          {userTrainedUmas.length > 8 && (
             <div className="text-center mt-8">
               <button 
-                onClick={() => handleViewAll('skill', userSkills)}
+                onClick={() => handleViewAll('trained-uma', userTrainedUmas)}
                 className="px-8 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-200"
               >
-                Show {userSkills.length - 8} More Skills
-              </button>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Factors Section */}
-      <section id="your-factors" className="py-16 bg-gray-50">
-        <div className="container">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-3">
-                🌟 Your Factors
-              </h2>
-              <p className="text-gray-600 text-lg">
-                Faktor khusus yang meningkatkan potensi Uma Musume ({userFactors.length} total)
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button 
-                onClick={() => handleViewAll('factor', userFactors)}
-                className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-all duration-200"
-              >
-                View All ({userFactors.length})
-              </button>
-              <button 
-                onClick={() => setAddModal({ isOpen: true, type: 'factor' })}
-                className="px-6 py-3 bg-uma-gold text-uma-blue border-2 border-uma-gold rounded-xl font-semibold hover:bg-uma-gold/90 transition-all duration-200"
-              >
-                🌟 Add New Factor
-              </button>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {userFactors.slice(0, 8).map((factor) => (
-              <FactorCard key={factor.id} {...factor} />
-            ))}
-          </div>
-          
-          {userFactors.length > 8 && (
-            <div className="text-center mt-8">
-              <button 
-                onClick={() => handleViewAll('factor', userFactors)}
-                className="px-8 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-200"
-              >
-                Show {userFactors.length - 8} More Factors
+                Show {userTrainedUmas.length - 8} More Trained Uma
               </button>
             </div>
           )}
@@ -368,18 +309,18 @@ export const ProgressTrackerPage: React.FC<ProgressTrackerPageProps> = ({ onNavi
             </div>
             
             <div className="bg-gradient-to-br from-uma-gold to-yellow-600 text-white p-6 rounded-2xl shadow-lg">
-              <div className="text-3xl font-bold mb-2">{userSkills.length}</div>
-              <div className="text-yellow-100">Skills Learned</div>
+              <div className="text-3xl font-bold mb-2">{userTrainedUmas.filter(uma => uma.rank === 'SS' || uma.rank === 'S').length}</div>
+              <div className="text-yellow-100">Top Ranked Uma</div>
               <div className="text-sm text-yellow-200 mt-2">
-                {Math.round((userSkills.length / (featuredSkills.length * 4)) * 100)}% Complete
+                {userTrainedUmas.length > 0 ? Math.round((userTrainedUmas.filter(uma => uma.rank === 'SS' || uma.rank === 'S').length / userTrainedUmas.length) * 100) : 0}% S/SS Rank
               </div>
             </div>
             
             <div className="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-2xl shadow-lg">
-              <div className="text-3xl font-bold mb-2">{userFactors.length}</div>
-              <div className="text-green-100">Factors Obtained</div>
+              <div className="text-3xl font-bold mb-2">{userTrainedUmas.length > 0 ? Math.round(userTrainedUmas.reduce((sum, uma) => sum + uma.level, 0) / userTrainedUmas.length) : 0}</div>
+              <div className="text-green-100">Average Level</div>
               <div className="text-sm text-green-200 mt-2">
-                {Math.round((userFactors.length / (featuredFactors.length * 2)) * 100)}% Complete
+                {userTrainedUmas.length} Uma Trained
               </div>
             </div>
           </div>
@@ -388,8 +329,8 @@ export const ProgressTrackerPage: React.FC<ProgressTrackerPageProps> = ({ onNavi
             <div className="inline-block bg-gray-100 rounded-2xl p-6">
               <h3 className="text-xl font-bold text-gray-800 mb-4">Overall Progress</h3>
               <div className="text-4xl font-bold text-uma-blue mb-2">
-                {Math.round(((userUmas.length + userSupportCards.length + userSkills.length + userFactors.length) / 
-                  ((featuredUmas.length * 2) + (featuredSupportCards.length * 3) + (featuredSkills.length * 4) + (featuredFactors.length * 2))) * 100)}%
+                {Math.round(((userUmas.length + userSupportCards.length + userTrainedUmas.length) / 
+                  ((featuredUmas.length * 2) + (featuredSupportCards.length * 3) + (featuredTrainedUmas.length * 2))) * 100)}%
               </div>
               <div className="text-gray-600">Collection Complete</div>
             </div>
@@ -401,7 +342,7 @@ export const ProgressTrackerPage: React.FC<ProgressTrackerPageProps> = ({ onNavi
       <AddItemModal
         isOpen={addModal.isOpen}
         onClose={() => setAddModal({ isOpen: false, type: null })}
-        type={addModal.type as 'uma' | 'support-card' | 'skill' | 'factor'}
+        type={addModal.type as 'uma' | 'support-card' | 'trained-uma'}
         onAdd={handleAddItem}
       />
     </>

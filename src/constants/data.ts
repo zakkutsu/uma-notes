@@ -1,4 +1,4 @@
-import type { Uma, SupportCard, Skill, Factor } from '../types';
+import type { Uma, SupportCard, Skill, Factor, TrainedUma } from '../types';
 
 // --- Placeholder Data ---
 export const featuredUmas: Uma[] = [
@@ -78,4 +78,43 @@ export const featuredFactors: Factor[] = [
   { id: 2, name: 'Turf Aptitude', stars: 2, type: 'Turf' },
   { id: 3, name: 'Speed Boost', stars: 1, type: 'Speed' },
   { id: 4, name: 'Power Inheritance', stars: 3, type: 'Power' },
+];
+
+export const featuredTrainedUmas: TrainedUma[] = [
+  {
+    id: 1,
+    name: 'Special Week',
+    rarity: 3,
+    imgUrl: 'https://placehold.co/256x384/3b82f6/ffffff?text=Special+Week',
+    level: 50,
+    stats: { speed: 1200, stamina: 1000, power: 900, guts: 800, intellect: 1100 },
+    rank: 'S'
+  },
+  {
+    id: 2,
+    name: 'Silence Suzuka',
+    rarity: 3,
+    imgUrl: 'https://placehold.co/256x384/8b5cf6/ffffff?text=Silence+Suzuka',
+    level: 45,
+    stats: { speed: 1300, stamina: 800, power: 950, guts: 750, intellect: 1050 },
+    rank: 'A'
+  },
+  {
+    id: 3,
+    name: 'Tokai Teio',
+    rarity: 3,
+    imgUrl: 'https://placehold.co/256x384/f59e0b/ffffff?text=Tokai+Teio',
+    level: 48,
+    stats: { speed: 1100, stamina: 1100, power: 1000, guts: 900, intellect: 950 },
+    rank: 'A'
+  },
+  {
+    id: 4,
+    name: 'Vodka',
+    rarity: 2,
+    imgUrl: 'https://placehold.co/256x384/ef4444/ffffff?text=Vodka',
+    level: 42,
+    stats: { speed: 1000, stamina: 950, power: 1050, guts: 850, intellect: 900 },
+    rank: 'B'
+  },
 ];

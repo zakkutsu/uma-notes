@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { MainLayout } from './layout';
 import { HomePage, ProgressTrackerPage, ViewAllPage } from './pages';
 import { getAppId } from './utils';
-import type { Page, Uma, SupportCard, Skill, Factor } from './types';
+import type { Page, Uma, SupportCard, Skill, Factor, TrainedUma } from './types';
 // import { onAuthStateChanged, User } from 'firebase/auth'; // Uncomment when Firebase is installed
 
 export default function App() {
@@ -13,8 +13,8 @@ export default function App() {
   
   // ViewAll page state
   const [viewAllState, setViewAllState] = useState<{
-    type: 'uma' | 'support-card' | 'skill' | 'factor' | null;
-    items: (Uma | SupportCard | Skill | Factor)[];
+    type: 'uma' | 'support-card' | 'skill' | 'factor' | 'trained-uma' | null;
+    items: (Uma | SupportCard | Skill | Factor | TrainedUma)[];
   }>({ type: null, items: [] });
   
   useEffect(() => {
@@ -38,13 +38,13 @@ export default function App() {
     setCurrentPage(page);
   };
 
-  const navigateToViewAll = (type: 'uma' | 'support-card' | 'skill' | 'factor', items: (Uma | SupportCard | Skill | Factor)[]) => {
+  const navigateToViewAll = (type: 'uma' | 'support-card' | 'skill' | 'factor' | 'trained-uma', items: (Uma | SupportCard | Skill | Factor | TrainedUma)[]) => {
     setViewAllState({ type, items });
     setCurrentPage('view-all');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleAddItem = (item: { id: number; name?: string; rarity?: number; imgUrl?: string; type?: string; icon?: string; description?: string; stars?: number }) => {
+  const handleAddItem = (item: { id: number; name?: string; rarity?: number; imgUrl?: string; type?: string; icon?: string; description?: string; stars?: number; level?: number; stats?: TrainedUma['stats']; rank?: string }) => {
     // This will be handled by the ProgressTrackerPage
     console.log('Add item:', item);
   };

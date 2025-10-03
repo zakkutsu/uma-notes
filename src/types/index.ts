@@ -29,6 +29,22 @@ export interface Factor {
   type: 'Turf' | 'Speed' | 'Power' | 'URA';
 }
 
+export interface TrainedUma {
+  id: number;
+  name: string;
+  rarity: number;
+  imgUrl: string;
+  level: number;
+  stats: {
+    speed: number;
+    stamina: number;
+    power: number;
+    guts: number;
+    intellect: number;
+  };
+  rank: 'G' | 'F' | 'E' | 'D' | 'C' | 'B' | 'A' | 'S' | 'SS';
+}
+
 export type Page = 'home' | 'progress' | 'view-all';
 
 // --- Navigation Types ---

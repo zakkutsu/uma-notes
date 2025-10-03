@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { Uma, SupportCard, Skill, Factor } from '../types';
-import { UmaCard, SupportCardCard, SkillCard, FactorCard } from '../components/Cards';
+import type { Uma, SupportCard, Skill, Factor, TrainedUma } from '../types';
+import { UmaCard, SupportCardCard, SkillCard, FactorCard, TrainedUmaCard } from '../components/Cards';
 import { AddItemModal } from '../components/AddItemModal';
 
 interface ViewAllPageProps {
-  type: 'uma' | 'support-card' | 'skill' | 'factor';
-  items: (Uma | SupportCard | Skill | Factor)[];
+  type: 'uma' | 'support-card' | 'skill' | 'factor' | 'trained-uma';
+  items: (Uma | SupportCard | Skill | Factor | TrainedUma)[];
   onBack: () => void;
-  onAddItem: (item: { id: number; name?: string; rarity?: number; imgUrl?: string; type?: string; icon?: string; description?: string; stars?: number }) => void;
+  onAddItem: (item: { id: number; name?: string; rarity?: number; imgUrl?: string; type?: string; icon?: string; description?: string; stars?: number; level?: number; stats?: TrainedUma['stats']; rank?: string }) => void;
 }
 
 const ITEMS_PER_PAGE = 12;
@@ -34,6 +34,8 @@ export const ViewAllPage: React.FC<ViewAllPageProps> = ({ type, items, onBack, o
         return '✨ All Your Skills';
       case 'factor':
         return '🌟 All Your Factors';
+      case 'trained-uma':
+        return '🏆 All Your Trained Uma';
       default:
         return 'All Items';
     }
@@ -49,6 +51,8 @@ export const ViewAllPage: React.FC<ViewAllPageProps> = ({ type, items, onBack, o
         return '✨ Add New Skill';
       case 'factor':
         return '🌟 Add New Factor';
+      case 'trained-uma':
+        return '🏆 Add New Trained Uma';
       default:
         return 'Add New Item';
     }
@@ -64,7 +68,7 @@ export const ViewAllPage: React.FC<ViewAllPageProps> = ({ type, items, onBack, o
     const maxVisiblePages = 5;
     
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
     
     if (endPage - startPage + 1 < maxVisiblePages) {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
@@ -116,15 +120,17 @@ export const ViewAllPage: React.FC<ViewAllPageProps> = ({ type, items, onBack, o
     return pages;
   };
 
-  const renderItem = (item: Uma | SupportCard | Skill | Factor) => {
-    if (type === 'uma' && 'rarity' in item && !('type' in item) && !('icon' in item) && !('stars' in item)) {
+  const renderItem = (item: Uma | SupportCard | Skill | Factor | TrainedUma) => {
+    if (type === 'uma' && 'rarity' in item && !('type' in item) && !('icon' in item) && !('stars' in item) && !('level' in item)) {
       return <UmaCard key={item.id} {...(item as Uma)} />;
-    } else if (type === 'support-card' && 'type' in item && !('icon' in item) && !('stars' in item)) {
+    } else if (type === 'support-card' && 'type' in item && !('icon' in item) && !('stars' in item) && !('level' in item)) {
       return <SupportCardCard key={item.id} {...(item as SupportCard)} />;
-    } else if (type === 'skill' && 'icon' in item && 'description' in item) {
+    } else if (type === 'skill' && 'icon' in item && 'description' in item && !('stats' in item) && !('rank' in item)) {
       return <SkillCard key={item.id} {...(item as Skill)} />;
-    } else if (type === 'factor' && 'stars' in item && 'type' in item && !('icon' in item)) {
+    } else if (type === 'factor' && 'stars' in item && 'type' in item && !('icon' in item) && !('level' in item)) {
       return <FactorCard key={item.id} {...(item as Factor)} />;
+    } else if (type === 'trained-uma' && 'level' in item && 'stats' in item && 'rank' in item) {
+      return <TrainedUmaCard key={item.id} {...(item as TrainedUma)} />;
     }
     return null;
   };
