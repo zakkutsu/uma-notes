@@ -67,8 +67,8 @@ export const Header: React.FC<HeaderProps> = ({
                     }} 
                     className={`px-3 py-2 rounded-md transition-colors text-sm ${
                       activeProgressNav === item 
-                        ? 'bg-gray-800 text-white' 
-                        : 'hover:bg-gray-200'
+                        ? 'bg-blue-100 text-uma-blue font-semibold' 
+                        : 'hover:bg-blue-50 hover:text-uma-blue'
                     }`}
                   >
                     {item}

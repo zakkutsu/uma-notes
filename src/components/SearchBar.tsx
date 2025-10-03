@@ -6,7 +6,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ placeholder, onSearch }) =
     <input 
       type="search" 
       placeholder={placeholder} 
-      className="w-full px-6 py-4 rounded-full text-gray-800 text-lg shadow-inner focus:outline-none focus:ring-4 focus:ring-white/50" 
+      className="w-full px-6 py-4 rounded-full bg-white text-gray-800 text-lg shadow-lg border border-gray-200 focus:outline-none focus:ring-4 focus:ring-white/50 focus:border-blue-300" 
       onChange={(e) => onSearch(e.target.value)} 
     />
     <svg 
