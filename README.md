@@ -1,4 +1,10 @@
 
+````mdc
+
+**🌐 Language / 言語 | [🇮🇩 Indonesian](#-uma-musume-notes) | [🇺🇸 English](#-uma-musume-notes-english) | [🇯🇵 日本語](#-uma-musume-notes-japanese)**
+
+---
+
 # 🐎 Uma Musume Notes
 
 **Uma Musume Notes** adalah platform database online komprehensif yang didedikasikan untuk game **Uma Musume Pretty Derby**. Aplikasi ini terdiri dari frontend React modern dan backend REST API yang menyediakan sistem manajemen data karakter, skill, support card, dan sistem inheritance yang kompleks.
@@ -285,6 +291,294 @@ AUTO_SEED=false
   },
   "data": { /* ... */ }
 }
+```
+
+---
+
+**Happy Coding! 🐎✨**
+
+---
+
+# 🐎 Uma Musume Notes (English)
+
+**Uma Musume Notes** is a comprehensive online database platform dedicated to the **Uma Musume Pretty Derby** game. This application consists of a modern React frontend and REST API backend that provides a complex character, skill, support card, and inheritance system management.
+
+## 🎯 Objectives
+
+Building an **easily searchable and informative Uma Musume database website** with features:
+
+- **Online Database**: Centralized storage system for all Uma Musume data
+- **Collection Tracker**: Intuitive interface for tracking progress and personal collections
+- **Structured API**: Scalable and easily consumable REST API
+- **Responsive Design**: Optimized for desktop and mobile devices
+- **Real-time Updates**: Frontend-backend integration for current data
+
+## 🏗️ System Architecture
+
+```
+┌─────────────────────────┐    HTTP/REST API    ┌─────────────────────────┐    SQL Queries    ┌─────────────────────────┐
+│                         │ ◄─────────────────► │                         │ ◄───────────────► │                         │
+│       Frontend          │                     │        Backend          │                   │       Database          │
+│    (React + Vite)       │                     │  (Node.js + Express)    │                   │      (PostgreSQL)       │
+│                         │                     │                         │                   │                         │
+│  • React 19 + TypeScript│                     │  • REST API Endpoints   │                   │  • Normalized Schema    │
+│  • Tailwind CSS         │                     │  • Sequelize ORM        │                   │  • ERD Compliant        │
+│  • React Query          │                     │  • Auto Seeding         │                   │  • Junction Tables      │
+│  • Responsive Design    │                     │  • Image Upload         │                   │  • Foreign Keys         │
+│                         │                     │                         │                   │                         │
+│  Port: 5173 (dev)       │                     │  Port: 3000             │                   │  Port: 5432             │
+└─────────────────────────┘                     └─────────────────────────┘                   └─────────────────────────┘
+```
+
+**Data Flow:**
+1. User interacts with React frontend
+2. Frontend sends HTTP requests to backend API
+3. Backend processes requests and communicates with PostgreSQL
+4. Database returns data through Sequelize ORM
+5. Backend sends JSON response to frontend
+6. React Query performs caching and UI updates
+
+## 📂 Repositories
+
+- 🎨 **Frontend**: [uma-notes](https://github.com/zakkutsu/uma-notes-fe.git) *(This Repository)*
+- ⚙️ **Backend**: [uma-notes-be](https://github.com/zakkutsu/uma-notes-be.git)
+
+## 🚀 Tech Stack
+
+### **Frontend** (This Repository)
+- **Framework**: React 19 with TypeScript
+- **Build Tool**: Vite 7 for super fast development
+- **Styling**: Tailwind CSS 4 with custom design system
+- **State Management**: React Query (TanStack Query) for server state
+- **Routing**: React Router DOM for navigation
+- **HTTP Client**: Axios for API communication
+
+### **Backend**
+- **Runtime**: Node.js with Express.js
+- **Database**: PostgreSQL with Sequelize ORM
+- **Upload**: Multer for file handling
+- **Development**: Nodemon for hot reload
+- **Containerization**: Docker Compose for PostgreSQL
+
+### **Database**
+- **PostgreSQL**: Production-grade database
+- **Sequelize ORM**: Advanced query capabilities with auto-migration
+- **ERD Compliant**: Normalized schema without redundancy
+- **Auto Seeding**: Automatic data population system for development
+
+## ✨ Main Features
+
+### **🗄️ Comprehensive Database**
+- **5+ Uma Characters** with complete 16 aptitude types (Speed, Stamina, Power, Guts, Wit)
+- **Skills Database** with rarity system (Normal/Rare/Unique) and 9 skill types
+- **Support Cards** with tier system (SSR/SR/R) and various card types
+- **Inheritance Factors** with color coding (Blue/Red/Green/White/Rainbow) & star ratings
+
+### **🎨 Modern Frontend**
+- **Homepage**: Database explorer with featured items and search functionality
+- **Collection Tracker**: Personal collection management with statistics
+- **Responsive Design**: Mobile-first approach with breakpoint optimization
+- **Smooth Animations**: CSS transitions and smooth hover effects
+
+### **🔌 Powerful Backend API**
+- **RESTful Endpoints**: Standard HTTP methods for all entities
+- **Smart Auto Seeder**: Duplicate prevention with environment control
+- **Image Management**: Polymorphic relations for all entities
+- **Production Ready**: Robust error handling with standardized responses
+
+## ⚙️ How to Run the Project
+
+### **Prerequisites**
+- Node.js v18+
+- Docker & Docker Compose (for PostgreSQL)
+- npm or yarn
+
+### **1. Backend Setup**
+```bash
+# Clone backend repository
+git clone https://github.com/zakkutsu/uma-notes-be.git
+cd uma-notes-be
+
+# Install dependencies
+npm install
+
+# Setup environment (.env)
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=uma_notes_db
+DB_USER=your_username
+DB_PASSWORD=your_password
+PORT=3000
+AUTO_SEED=true
+
+# Start PostgreSQL with Docker
+docker-compose up -d
+
+# Run backend
+npm run dev
+# Backend runs at http://localhost:3000
+```
+
+### **2. Frontend Setup**
+```bash
+# Clone frontend repository  
+git clone https://github.com/zakkutsu/uma-notes-fe.git
+cd uma-notes-fe
+
+# Install dependencies
+npm install
+
+# Setup environment (.env)
+VITE_API_BASE_URL=http://localhost:3000/api/v1
+VITE_APP_TITLE=Uma Musume Notes
+
+# Run frontend
+npm run dev
+# Frontend runs at http://localhost:5173
+```
+
+---
+
+**Happy Coding! 🐎✨**
+
+---
+
+# 🐎 Uma Musume Notes (Japanese)
+
+**Uma Musume Notes** は、**ウマ娘 プリティーダービー** ゲーム専用の包括的なオンラインデータベースプラットフォームです。このアプリケーションは、モダンなReactフロントエンドと、キャラクター、スキル、サポートカード、継承システムの複雑な管理を提供するREST APIバックエンドで構成されています。
+
+## 🎯 目標
+
+以下の機能を持つ**検索しやすく情報豊富なウマ娘データベースウェブサイト**の構築：
+
+- **オンラインデータベース**: すべてのウマ娘データの集中ストレージシステム
+- **コレクショントラッカー**: 進捗と個人コレクションを追跡する直感的なインターフェース
+- **構造化API**: スケーラブルで簡単に利用できるREST API
+- **レスポンシブデザイン**: デスクトップとモバイルデバイス向けに最適化
+- **リアルタイム更新**: 最新データのためのフロントエンド・バックエンド統合
+
+## 🏗️ システムアーキテクチャ
+
+```
+┌─────────────────────────┐    HTTP/REST API    ┌─────────────────────────┐    SQL Queries    ┌─────────────────────────┐
+│                         │ ◄─────────────────► │                         │ ◄───────────────► │                         │
+│      フロントエンド      │                     │       バックエンド       │                   │      データベース        │
+│    (React + Vite)       │                     │  (Node.js + Express)    │                   │      (PostgreSQL)       │
+│                         │                     │                         │                   │                         │
+│  • React 19 + TypeScript│                     │  • REST API エンドポイント│                   │  • 正規化スキーマ        │
+│  • Tailwind CSS         │                     │  • Sequelize ORM        │                   │  • ERD 準拠             │
+│  • React Query          │                     │  • 自動シーディング       │                   │  • ジャンクションテーブル │
+│  • レスポンシブデザイン   │                     │  • 画像アップロード       │                   │  • 外部キー             │
+│                         │                     │                         │                   │                         │
+│  ポート: 5173 (dev)      │                     │  ポート: 3000            │                   │  ポート: 5432           │
+└─────────────────────────┘                     └─────────────────────────┘                   └─────────────────────────┘
+```
+
+**データフロー:**
+1. ユーザーがReactフロントエンドと対話
+2. フロントエンドがバックエンドAPIにHTTPリクエストを送信
+3. バックエンドがリクエストを処理し、PostgreSQLと通信
+4. データベースがSequelize ORMを通じてデータを返す
+5. バックエンドがフロントエンドにJSONレスポンスを送信
+6. React Queryがキャッシュとこのが交換
+
+## 📂 リポジトリ
+
+- 🎨 **フロントエンド**: [uma-notes](https://github.com/zakkutsu/uma-notes-fe.git) *(このリポジトリ)*
+- ⚙️ **バックエンド**: [uma-notes-be](https://github.com/zakkutsu/uma-notes-be.git)
+
+## 🚀 技術スタック
+
+### **フロントエンド** (このリポジトリ)
+- **フレームワーク**: React 19 with TypeScript
+- **ビルドツール**: Vite 7 for 超高速開発
+- **スタイリング**: Tailwind CSS 4 with カスタムデザインシステム
+- **状態管理**: React Query (TanStack Query) for サーバー状態
+- **ルーティング**: React Router DOM for ナビゲーション
+- **HTTPクライアント**: Axios for API通信
+
+### **バックエンド**
+- **ランタイム**: Node.js with Express.js
+- **データベース**: PostgreSQL with Sequelize ORM
+- **アップロード**: Multer for ファイル処理
+- **開発**: Nodemon for ホットリロード
+- **コンテナ化**: Docker Compose for PostgreSQL
+
+### **データベース**
+- **PostgreSQL**: プロダクション級データベース
+- **Sequelize ORM**: 自動マイグレーション付き高度クエリ機能
+- **ERD準拠**: 冗長性のない正規化スキーマ
+- **自動シーディング**: 開発用自動データ投入システム
+
+## ✨ 主な機能
+
+### **🗄️ 包括的データベース**
+- **5+ウマ娘キャラクター** 16適性タイプ完全対応 (スピード、スタミナ、パワー、根性、賢さ)
+- **スキルデータベース** レアリティシステム付き (ノーマル/レア/固有) と9スキルタイプ
+- **サポートカード** ティアシステム (SSR/SR/R) と様々なカードタイプ
+- **継承ファクター** カラーコーディング (青/赤/緑/白/虹) & 星評価
+
+### **🎨 モダンフロントエンド**
+- **ホームページ**: 注目アイテムと検索機能付きデータベースエクスプローラー
+- **コレクショントラッカー**: 統計付き個人コレクション管理
+- **レスポンシブデザイン**: ブレークポイント最適化によるモバイルファースト
+- **スムーズアニメーション**: CSSトランジションと滑らかなホバー効果
+
+### **🔌 強力なバックエンドAPI**
+- **RESTfulエンドポイント**: すべてのエンティティに対する標準HTTPメソッド
+- **スマート自動シーダー**: 環境制御による重複防止
+- **画像管理**: すべてのエンティティのためのポリモーフィックリレーション
+- **プロダクション対応**: 標準化レスポンスによる堅牢エラーハンドリング
+
+## ⚙️ プロジェクトの実行方法
+
+### **前提条件**
+- Node.js v18+
+- Docker & Docker Compose (PostgreSQL用)
+- npm または yarn
+
+### **1. バックエンドセットアップ**
+```bash
+# バックエンドリポジトリをクローン
+git clone https://github.com/zakkutsu/uma-notes-be.git
+cd uma-notes-be
+
+# 依存関係をインストール
+npm install
+
+# 環境設定 (.env)
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=uma_notes_db
+DB_USER=your_username
+DB_PASSWORD=your_password
+PORT=3000
+AUTO_SEED=true
+
+# DockerでPostgreSQLを起動
+docker-compose up -d
+
+# バックエンドを実行
+npm run dev
+# バックエンドは http://localhost:3000 で動作
+```
+
+### **2. フロントエンドセットアップ**
+```bash
+# フロントエンドリポジトリをクローン
+git clone https://github.com/zakkutsu/uma-notes-fe.git
+cd uma-notes-fe
+
+# 依存関係をインストール
+npm install
+
+# 環境設定 (.env)
+VITE_API_BASE_URL=http://localhost:3000/api/v1
+VITE_APP_TITLE=Uma Musume Notes
+
+# フロントエンドを実行
+npm run dev
+# フロントエンドは http://localhost:5173 で動作
 ```
 
 ---
