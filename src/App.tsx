@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { MainLayout } from './layout';
-import { HomePage, ProgressTrackerPage } from './pages';
+import { HomePage, ProgressTrackerPage, ViewAllPage } from './pages';
 import { getAppId } from './utils';
-import type { Page } from './types';
+import type { Page, Uma, SupportCard, Skill, Factor } from './types';
 // import { onAuthStateChanged, User } from 'firebase/auth'; // Uncomment when Firebase is installed
 
 export default function App() {
@@ -10,6 +10,12 @@ export default function App() {
   const [activeNav, setActiveNav] = useState<string>('Home');
   const [activeProgressNav, setActiveProgressNav] = useState<string>('Your Uma');
   const [scrollTarget, setScrollTarget] = useState<string | null>(null);
+  
+  // ViewAll page state
+  const [viewAllState, setViewAllState] = useState<{
+    type: 'uma' | 'support-card' | 'skill' | 'factor' | null;
+    items: (Uma | SupportCard | Skill | Factor)[];
+  }>({ type: null, items: [] });
   
   useEffect(() => {
     // Firebase initialization will be added later when needed
@@ -30,6 +36,17 @@ export default function App() {
     }
     
     setCurrentPage(page);
+  };
+
+  const navigateToViewAll = (type: 'uma' | 'support-card' | 'skill' | 'factor', items: (Uma | SupportCard | Skill | Factor)[]) => {
+    setViewAllState({ type, items });
+    setCurrentPage('view-all');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleAddItem = (item: { id: number; name?: string; rarity?: number; imgUrl?: string; type?: string; icon?: string; description?: string; stars?: number }) => {
+    // This will be handled by the ProgressTrackerPage
+    console.log('Add item:', item);
   };
 
   useEffect(() => {
@@ -61,8 +78,19 @@ export default function App() {
     <MainLayout headerProps={headerProps}>
       {currentPage === 'home' ? (
         <HomePage onNavigate={navigateTo} setActiveNav={setActiveNav} />
+      ) : currentPage === 'view-all' && viewAllState.type ? (
+        <ViewAllPage
+          type={viewAllState.type}
+          items={viewAllState.items}
+          onBack={() => navigateTo('progress')}
+          onAddItem={handleAddItem}
+        />
       ) : (
-        <ProgressTrackerPage onNavigate={navigateTo} setActiveProgressNav={setActiveProgressNav} />
+        <ProgressTrackerPage 
+          onNavigate={navigateTo} 
+          setActiveProgressNav={setActiveProgressNav}
+          onViewAll={navigateToViewAll}
+        />
       )}
     </MainLayout>
   );

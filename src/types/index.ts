@@ -29,7 +29,7 @@ export interface Factor {
   type: 'Turf' | 'Speed' | 'Power' | 'URA';
 }
 
-export type Page = 'home' | 'progress';
+export type Page = 'home' | 'progress' | 'view-all';
 
 // --- Navigation Types ---
 export interface NavigationMaps {

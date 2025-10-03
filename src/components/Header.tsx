@@ -67,8 +67,8 @@ export const Header: React.FC<HeaderProps> = ({
                     }} 
                     className={`px-3 py-2 rounded-md transition-colors text-sm ${
                       activeProgressNav === item 
-                        ? 'bg-blue-100 text-uma-blue font-semibold' 
-                        : 'hover:bg-blue-50 hover:text-uma-blue'
+                        ? 'bg-yellow-100 text-orange-600 font-semibold' 
+                        : 'hover:bg-yellow-50 hover:text-orange-500'
                     }`}
                   >
                     {item}
@@ -80,7 +80,9 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="relative" ref={dropdownRef}>
             <button 
               onClick={() => setDropdownOpen(!isDropdownOpen)} 
-              className="w-10 h-10 rounded-full overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-uma-blue"
+              className={`w-10 h-10 rounded-full overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                currentPage === 'progress' ? 'focus:ring-orange-500' : 'focus:ring-uma-blue'
+              }`}
             >
               <img 
                 src="https://placehold.co/40x40/e0e0e0/333333?text=P" 
@@ -91,13 +93,19 @@ export const Header: React.FC<HeaderProps> = ({
             
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 ring-1 ring-black ring-opacity-5">
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="#" className={`block px-4 py-2 text-sm text-gray-700 ${
+                  currentPage === 'progress' ? 'hover:bg-yellow-50 hover:text-orange-600' : 'hover:bg-blue-50 hover:text-uma-blue'
+                }`}>
                   Profile
                 </a>
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="#" className={`block px-4 py-2 text-sm text-gray-700 ${
+                  currentPage === 'progress' ? 'hover:bg-yellow-50 hover:text-orange-600' : 'hover:bg-blue-50 hover:text-uma-blue'
+                }`}>
                   Account Setting
                 </a>
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="#" className={`block px-4 py-2 text-sm text-gray-700 ${
+                  currentPage === 'progress' ? 'hover:bg-yellow-50 hover:text-orange-600' : 'hover:bg-blue-50 hover:text-uma-blue'
+                }`}>
                   Logout
                 </a>
               </div>
