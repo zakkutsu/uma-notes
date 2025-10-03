@@ -1,158 +1,313 @@
+<div align="center">
 
-````mdc
+# 🐎✨ Uma Musume Notes ✨🐎
 
-**🌐 Language / 言語 | [🇮🇩 Indonesian](#-uma-musume-notes) | [🇺🇸 English](#-uma-musume-notes-english) | [🇯🇵 日本語](#-uma-musume-notes-japanese)**
+<p align="center">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React"/>
+  <img src="https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+</p>
+
+<p align="center">
+  <strong>🌟 Platform database online komprehensif untuk Uma Musume Pretty Derby 🌟</strong>
+</p>
+
+</div>
 
 ---
 
-# 🐎 Uma Musume Notes
+<div align="center">
 
-**Uma Musume Notes** adalah platform database online komprehensif yang didedikasikan untuk game **Uma Musume Pretty Derby**. Aplikasi ini terdiri dari frontend React modern dan backend REST API yang menyediakan sistem manajemen data karakter, skill, support card, dan sistem inheritance yang kompleks.
+## 🌐 Language Selection
+
+<table>
+<tr>
+<td align="center">
+  <a href="#-uma-musume-notes-indonesia">
+    <img src="https://img.shields.io/badge/🇮🇩-Indonesian-FF0000?style=for-the-badge&labelColor=FFFFFF" alt="Indonesian"/>
+  </a>
+</td>
+<td align="center">
+  <a href="#-uma-musume-notes-english">
+    <img src="https://img.shields.io/badge/🇺🇸-English-0052CC?style=for-the-badge&labelColor=FFFFFF" alt="English"/>
+  </a>
+</td>
+<td align="center">
+  <a href="#-uma-musume-notes-japanese">
+    <img src="https://img.shields.io/badge/🇯🇵-日本語-BC002D?style=for-the-badge&labelColor=FFFFFF" alt="Japanese"/>
+  </a>
+</td>
+</tr>
+</table>
+
+</div>
+
+---
+
+# 🐎 Uma Musume Notes (Indonesia)
+
+> **Uma Musume Notes** adalah platform database online komprehensif yang didedikasikan untuk game **Uma Musume Pretty Derby**. Aplikasi ini terdiri dari frontend React modern dan backend REST API yang powerful!
+
+<details>
+<summary>📋 <strong>Daftar Isi</strong></summary>
+
+- [🎯 Tujuan](#-tujuan)
+- [🏗️ Arsitektur Sistem](#️-arsitektur-sistem)
+- [📂 Repositori](#-repositori)
+- [🚀 Tech Stack](#-tech-stack)
+- [✨ Fitur Utama](#-fitur-utama)
+- [📱 Preview Aplikasi](#-preview-aplikasi)
+- [⚙️ Cara Menjalankan Project](#️-cara-menjalankan-project)
+- [🎮 Fitur yang Tersedia](#-fitur-yang-tersedia)
+- [🔧 Deployment](#-deployment)
+
+</details>
 
 ## 🎯 Tujuan
 
-Membangun **website database Uma Musume yang mudah dicari dan informatif** dengan fitur:
-
-- **Database Online**: Sistem penyimpanan terpusat untuk semua data Uma Musume
-- **Collection Tracker**: Interface intuitif untuk melacak progres dan koleksi personal
-- **API Terstruktur**: REST API yang skalabel dan mudah dikonsumsi
-- **Responsive Design**: Optimized untuk desktop dan mobile devices
-- **Real-time Updates**: Integrasi frontend-backend untuk data terkini
+<div align="center">
+<table>
+<tr>
+<td align="center" width="25%">
+  <img src="https://github.com/user-attachments/assets/database-icon" width="60" height="60"/>
+  <br><strong>🗄️ Database Online</strong>
+  <br><sub>Sistem penyimpanan terpusat</sub>
+</td>
+<td align="center" width="25%">
+  <img src="https://github.com/user-attachments/assets/tracker-icon" width="60" height="60"/>
+  <br><strong>📊 Collection Tracker</strong>
+  <br><sub>Interface intuitif untuk progres</sub>
+</td>
+<td align="center" width="25%">
+  <img src="https://github.com/user-attachments/assets/api-icon" width="60" height="60"/>
+  <br><strong>🔌 API Terstruktur</strong>
+  <br><sub>REST API yang skalabel</sub>
+</td>
+<td align="center" width="25%">
+  <img src="https://github.com/user-attachments/assets/responsive-icon" width="60" height="60"/>
+  <br><strong>📱 Responsive Design</strong>
+  <br><sub>Optimized untuk semua device</sub>
+</td>
+</tr>
+</table>
+</div>
 
 ## 🏗️ Arsitektur Sistem
 
-```
-┌─────────────────────────┐    HTTP/REST API    ┌─────────────────────────┐    SQL Queries    ┌─────────────────────────┐
-│                         │ ◄─────────────────► │                         │ ◄───────────────► │                         │
-│       Frontend          │                     │        Backend          │                   │       Database          │
-│    (React + Vite)       │                     │  (Node.js + Express)    │                   │      (PostgreSQL)       │
-│                         │                     │                         │                   │                         │
-│  • React 19 + TypeScript│                     │  • REST API Endpoints   │                   │  • Normalized Schema    │
-│  • Tailwind CSS         │                     │  • Sequelize ORM        │                   │  • ERD Compliant        │
-│  • React Query          │                     │  • Auto Seeding         │                   │  • Junction Tables      │
-│  • Responsive Design    │                     │  • Image Upload         │                   │  • Foreign Keys         │
-│                         │                     │                         │                   │                         │
-│  Port: 5173 (dev)       │                     │  Port: 3000             │                   │  Port: 5432             │
-└─────────────────────────┘                     └─────────────────────────┘                   └─────────────────────────┘
+<div align="center">
+
+```mermaid
+graph LR
+    A[👤 User] --> B[🎨 Frontend<br/>React + Vite<br/>Port: 5173]
+    B --> C[⚙️ Backend<br/>Node.js + Express<br/>Port: 3000]
+    C --> D[🗄️ Database<br/>PostgreSQL<br/>Port: 5432]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
 ```
 
-**Data Flow:**
-1. User berinteraksi dengan React frontend
-2. Frontend mengirim HTTP requests ke backend API
-3. Backend memproses request dan berkomunikasi dengan PostgreSQL
-4. Database mengembalikan data melalui Sequelize ORM
-5. Backend mengirim JSON response ke frontend
-6. React Query melakukan caching dan update UI
+</div>
+
+<details>
+<summary>🔄 <strong>Data Flow Process</strong></summary>
+
+1. **👤 User Interaction** → User berinteraksi dengan React frontend
+2. **📤 HTTP Request** → Frontend mengirim HTTP requests ke backend API
+3. **⚙️ Processing** → Backend memproses request dan berkomunikasi dengan PostgreSQL
+4. **🔄 ORM Query** → Database mengembalikan data melalui Sequelize ORM
+5. **📥 JSON Response** → Backend mengirim JSON response ke frontend
+6. **🎨 UI Update** → React Query melakukan caching dan update UI
+
+</details>
 
 ## 📂 Repositori
 
-- 🎨 **Frontend**: [uma-notes](https://github.com/zakkutsu/uma-notes-fe.git) *(Repository ini)*
-- ⚙️ **Backend**: [uma-notes-be](https://github.com/zakkutsu/uma-notes-be.git)
+<div align="center">
+<table>
+<tr>
+<td align="center">
+  <a href="https://github.com/zakkutsu/uma-notes-fe.git">
+    <img src="https://img.shields.io/badge/🎨_Frontend-uma--notes--fe-blueviolet?style=for-the-badge&logo=github" alt="Frontend"/>
+  </a>
+  <br><sub><em>Repository ini</em></sub>
+</td>
+<td align="center">
+  <a href="https://github.com/zakkutsu/uma-notes-be.git">
+    <img src="https://img.shields.io/badge/⚙️_Backend-uma--notes--be-orange?style=for-the-badge&logo=github" alt="Backend"/>
+  </a>
+</td>
+</tr>
+</table>
+</div>
 
 ## 🚀 Tech Stack
 
-### **Frontend** (Repository ini)
-- **Framework**: React 19 dengan TypeScript
-- **Build Tool**: Vite 7 untuk development yang super cepat
-- **Styling**: Tailwind CSS 4 dengan custom design system
-- **State Management**: React Query (TanStack Query) untuk server state
-- **Routing**: React Router DOM untuk navigation
-- **HTTP Client**: Axios untuk API communication
+<div align="center">
 
-### **Backend**
-- **Runtime**: Node.js dengan Express.js
-- **Database**: PostgreSQL dengan Sequelize ORM
-- **Upload**: Multer untuk file handling
-- **Development**: Nodemon untuk hot reload
-- **Containerization**: Docker Compose untuk PostgreSQL
+### 🎨 Frontend (Repository ini)
+<p>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react" alt="React"/>
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite" alt="Vite"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=flat-square&logo=tailwind-css" alt="Tailwind"/>
+  <img src="https://img.shields.io/badge/React_Query-FF4154?style=flat-square&logo=react-query" alt="React Query"/>
+  <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios" alt="Axios"/>
+</p>
 
-### **Database**
-- **PostgreSQL**: Database production-grade
-- **Sequelize ORM**: Advanced query capabilities dengan auto-migration
-- **ERD Compliant**: Normalized schema tanpa redundansi
-- **Auto Seeding**: Sistem populasi data otomatis untuk development
+### ⚙️ Backend
+<p>
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express" alt="Express"/>
+  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql" alt="PostgreSQL"/>
+  <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat-square&logo=sequelize" alt="Sequelize"/>
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker" alt="Docker"/>
+  <img src="https://img.shields.io/badge/Multer-000000?style=flat-square" alt="Multer"/>
+</p>
+
+</div>
 
 ## ✨ Fitur Utama
 
-### **🗄️ Comprehensive Database**
-- **5+ Karakter Uma** dengan 16 aptitude types lengkap (Speed, Stamina, Power, Guts, Wit)
-- **Skills Database** dengan rarity system (Normal/Rare/Unique) dan 9 skill types
-- **Support Cards** dengan tier system (SSR/SR/R) dan berbagai card types
-- **Inheritance Factors** dengan color coding (Blue/Red/Green/White/Rainbow) & star ratings
-
-### **🎨 Modern Frontend**
-- **Homepage**: Database explorer dengan featured items dan search functionality
-- **Collection Tracker**: Personal collection management dengan statistics
-- **Responsive Design**: Mobile-first approach dengan breakpoint optimization
-- **Smooth Animations**: CSS transitions dan hover effects yang halus
-
-### **🔌 Powerful Backend API**
-- **RESTful Endpoints**: Standard HTTP methods untuk semua entities
-- **Smart Auto Seeder**: Duplicate prevention dengan environment control
-- **Image Management**: Polymorphic relations untuk semua entitas
-- **Production Ready**: Robust error handling dengan standardized responses
+<div align="center">
+<table>
+<tr>
+<td align="center" width="33%">
+  <h3>🗄️ Comprehensive Database</h3>
+  <ul align="left">
+    <li>🐎 <strong>5+ Karakter Uma</strong> dengan 16 aptitude types</li>
+    <li>⚡ <strong>Skills Database</strong> dengan rarity system</li>
+    <li>🃏 <strong>Support Cards</strong> dengan tier system</li>
+    <li>🧬 <strong>Inheritance Factors</strong> dengan color coding</li>
+  </ul>
+</td>
+<td align="center" width="33%">
+  <h3>🎨 Modern Frontend</h3>
+  <ul align="left">
+    <li>🏠 <strong>Homepage</strong> dengan database explorer</li>
+    <li>📊 <strong>Collection Tracker</strong> personal management</li>
+    <li>📱 <strong>Responsive Design</strong> mobile-first</li>
+    <li>✨ <strong>Smooth Animations</strong> CSS transitions</li>
+  </ul>
+</td>
+<td align="center" width="33%">
+  <h3>🔌 Powerful Backend API</h3>
+  <ul align="left">
+    <li>🌐 <strong>RESTful Endpoints</strong> standard HTTP</li>
+    <li>🤖 <strong>Smart Auto Seeder</strong> duplicate prevention</li>
+    <li>🖼️ <strong>Image Management</strong> polymorphic relations</li>
+    <li>🚀 <strong>Production Ready</strong> robust error handling</li>
+  </ul>
+</td>
+</tr>
+</table>
+</div>
 
 ## 📱 Preview Aplikasi
 
-### **Database Structure**
+<details>
+<summary>🏗️ <strong>Database Structure</strong></summary>
+
+```mermaid
+erDiagram
+    UMAS {
+        int id PK
+        string name
+        json aptitudes
+        json base_stats
+    }
+    
+    SKILLS {
+        int id PK
+        string name
+        string rarity
+        string skill_type
+        text effect
+    }
+    
+    UMA_SKILLS {
+        int uma_id FK
+        int skill_id FK
+        string skill_category
+    }
+    
+    TRAINED_UMAS {
+        int id PK
+        json final_stats
+        int parent1_id FK
+        int parent2_id FK
+    }
+    
+    FACTORS {
+        int id PK
+        string factor_type
+        string color
+        int star_rating
+    }
+    
+    UMAS ||--o{ UMA_SKILLS : has
+    SKILLS ||--o{ UMA_SKILLS : belongs_to
+    TRAINED_UMAS ||--o{ FACTORS : inherits
 ```
-┌─────────────┐    ┌──────────────┐    ┌─────────────────┐
-│    Umas     │◄──►│  uma_skills  │◄──►│     Skills      │
-│             │    │              │    │                 │
-│ - 16 aptitude    │ - skill_category   │ - skill_rarity  │
-│ - base stats │    │ - uma_id     │    │ - skill_effect  │
-└─────────────┘    │ - skill_id   │    └─────────────────┘
-                   └──────────────┘              ▲
-                                                 │
-┌─────────────┐    ┌──────────────┐              │
-│TrainedUmas  │◄──►│trained_uma_  │              │
-│             │    │acquired_skills◄─────────────┘
-│ - final_stats    └──────────────┘
-│ - parent1_id │
-│ - parent2_id │    ┌──────────────┐    ┌─────────────────┐
-└─────────────┘◄──►│trained_uma_  │◄──►│    Factors      │
-                   │  factors     │    │                 │
-                   │ - star_rating│    │ - factor_type   │
-                   └──────────────┘    │ - color         │
-                                       └─────────────────┘
-```
 
-### **API Endpoints**
-```
-Base URL: http://localhost:3000/api/v1
+</details>
 
-GET    /umas              # Get all umas with pagination
-GET    /umas/:id          # Get uma by ID
-POST   /umas              # Create new uma (with image upload)
+<details>
+<summary>🌐 <strong>API Endpoints</strong></summary>
 
-GET    /skills            # Get all skills with pagination  
-GET    /skills/:id        # Get skill by ID
+<div align="center">
 
-GET    /support-cards     # Get all support cards
-GET    /factors           # Get all factors
-GET    /trained-umas      # Get all trained umas
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| 🟢 GET | `/api/v1/umas` | Get all umas dengan pagination |
+| 🟢 GET | `/api/v1/umas/:id` | Get uma by ID |
+| 🟡 POST | `/api/v1/umas` | Create new uma (dengan image upload) |
+| 🟢 GET | `/api/v1/skills` | Get all skills dengan pagination |
+| 🟢 GET | `/api/v1/skills/:id` | Get skill by ID |
+| 🟢 GET | `/api/v1/support-cards` | Get all support cards |
+| 🟢 GET | `/api/v1/factors` | Get all factors |
+| 🟢 GET | `/api/v1/trained-umas` | Get all trained umas |
 
-GET    /seed              # Database statistics
-POST   /seed/run          # Manual trigger seeding
-```
+</div>
+
+</details>
 
 ## ⚙️ Cara Menjalankan Project
 
-### **Prerequisites**
-- Node.js v18+
-- Docker & Docker Compose (untuk PostgreSQL)
-- npm atau yarn
+### 📋 Prerequisites
 
-### **1. Setup Backend**
+<div align="center">
+<table>
+<tr>
+<td align="center">
+  <img src="https://img.shields.io/badge/Node.js-v18+-339933?style=for-the-badge&logo=node.js" alt="Node.js"/>
+</td>
+<td align="center">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker" alt="Docker"/>
+</td>
+<td align="center">
+  <img src="https://img.shields.io/badge/npm/yarn-CB3837?style=for-the-badge&logo=npm" alt="npm"/>
+</td>
+</tr>
+</table>
+</div>
+
+### 🚀 Quick Start
+
+<details>
+<summary>⚙️ <strong>1. Backend Setup</strong></summary>
+
 ```bash
-# Clone repository backend
+# 📥 Clone repository backend
 git clone https://github.com/zakkutsu/uma-notes-be.git
 cd uma-notes-be
 
-# Install dependencies
+# 📦 Install dependencies
 npm install
 
-# Setup environment (.env)
+# ⚙️ Setup environment (.env)
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=uma_notes_db
@@ -161,73 +316,113 @@ DB_PASSWORD=your_password
 PORT=3000
 AUTO_SEED=true
 
-# Start PostgreSQL dengan Docker
+# 🐳 Start PostgreSQL dengan Docker
 docker-compose up -d
 
-# Jalankan backend
+# 🚀 Jalankan backend
 npm run dev
-# Backend berjalan di http://localhost:3000
+# 🌐 Backend berjalan di http://localhost:3000
 ```
 
-### **2. Setup Frontend**
+</details>
+
+<details>
+<summary>🎨 <strong>2. Frontend Setup</strong></summary>
+
 ```bash
-# Clone repository frontend  
+# 📥 Clone repository frontend  
 git clone https://github.com/zakkutsu/uma-notes-fe.git
 cd uma-notes-fe
 
-# Install dependencies
+# 📦 Install dependencies
 npm install
 
-# Setup environment (.env)
+# ⚙️ Setup environment (.env)
 VITE_API_BASE_URL=http://localhost:3000/api/v1
 VITE_APP_TITLE=Uma Musume Notes
 
-# Jalankan frontend
+# 🚀 Jalankan frontend
 npm run dev
-# Frontend berjalan di http://localhost:5173
+# 🌐 Frontend berjalan di http://localhost:5173
 ```
 
-### **3. Verify Installation**
+</details>
+
+<details>
+<summary>✅ <strong>3. Verify Installation</strong></summary>
+
 ```bash
-# Test backend API
+# 🧪 Test backend API
 curl http://localhost:3000/api/v1/seed
 
-# Akses frontend di browser
+# 🌐 Akses frontend di browser
 http://localhost:5173
 ```
 
+</details>
+
 ## 🎮 Fitur yang Tersedia
 
-### **Frontend Features**
-- ✅ **Homepage**: Database explorer dengan hero section dan featured collections
-- ✅ **Progress Tracker**: Personal collection management dengan statistics
-- ✅ **View All Pages**: Paginated display untuk large datasets
-- ✅ **Responsive Design**: Mobile-first responsive layout
-- ✅ **Search Functionality**: Global search dengan header integration
-- ✅ **Modal System**: Add new items dengan user-friendly interface
-
-### **Backend Features**  
-- ✅ **RESTful API**: Standard HTTP methods untuk CRUD operations
-- ✅ **Auto Seeding**: Smart data population dengan duplicate prevention
-- ✅ **Image Upload**: Multer integration dengan organized folder structure
-- ✅ **Error Handling**: Robust error management dengan standardized responses
-- ✅ **Pagination**: Query parameters support (?page=1&limit=10)
-- ✅ **Data Validation**: Comprehensive input validation
-
-### **Database Features**
-- ✅ **Normalized Schema**: ERD compliant dengan foreign keys
-- ✅ **Junction Tables**: Proper many-to-many relationships
-- ✅ **Auto Migration**: Database schema auto-sync dengan Sequelize
-- ✅ **Seeding Control**: Manual dan automatic data population
+<div align="center">
+<table>
+<tr>
+<th>🎨 Frontend Features</th>
+<th>⚙️ Backend Features</th>
+<th>🗄️ Database Features</th>
+</tr>
+<tr>
+<td>
+  ✅ Homepage Explorer<br/>
+  ✅ Progress Tracker<br/>
+  ✅ View All Pages<br/>
+  ✅ Responsive Design<br/>
+  ✅ Search Functionality<br/>
+  ✅ Modal System
+</td>
+<td>
+  ✅ RESTful API<br/>
+  ✅ Auto Seeding<br/>
+  ✅ Image Upload<br/>
+  ✅ Error Handling<br/>
+  ✅ Pagination<br/>
+  ✅ Data Validation
+</td>
+<td>
+  ✅ Normalized Schema<br/>
+  ✅ Junction Tables<br/>
+  ✅ Auto Migration<br/>
+  ✅ Seeding Control<br/>
+  ✅ Foreign Keys<br/>
+  ✅ ERD Compliant
+</td>
+</tr>
+</table>
+</div>
 
 ## 🔧 Deployment
 
-### **Recommended Stack**
-- **Frontend**: Vercel / Netlify (Static deployment)
-- **Backend**: Railway / Render / VPS dengan domain .my.id  
-- **Database**: PostgreSQL cloud (Supabase / ElephantSQL / Railway)
+<div align="center">
 
-### **Environment Variables**
+### 🌟 Recommended Stack
+
+<table>
+<tr>
+<td align="center">
+  <img src="https://img.shields.io/badge/Frontend-Vercel/Netlify-000000?style=for-the-badge&logo=vercel" alt="Frontend"/>
+</td>
+<td align="center">
+  <img src="https://img.shields.io/badge/Backend-Railway/Render-0B0D0E?style=for-the-badge&logo=railway" alt="Backend"/>
+</td>
+<td align="center">
+  <img src="https://img.shields.io/badge/Database-Supabase-3ECF8E?style=for-the-badge&logo=supabase" alt="Database"/>
+</td>
+</tr>
+</table>
+
+</div>
+
+<details>
+<summary>🔧 <strong>Environment Variables</strong></summary>
 
 **Frontend (.env)**
 ```env
@@ -246,35 +441,60 @@ NODE_ENV=production
 AUTO_SEED=false
 ```
 
+</details>
+
 ## 🏷️ Tags
 
-**Full Stack**: `React` `Node.js` `PostgreSQL` `TypeScript` `REST API` `Responsive Design`  
-**Frontend**: `Vite` `Tailwind CSS` `React Query` `Component Architecture` `Mobile First`  
-**Backend**: `Express.js` `Sequelize ORM` `Auto Seeding` `File Upload` `Docker`  
-**Database**: `ERD Compliant` `Normalized Schema` `Junction Tables` `Foreign Keys`  
-**Game**: `Uma Musume` `Pretty Derby` `Character Database` `Collection Tracker` `Horse Racing` `Gacha Game` `Anime` `Horse Girls`
+<div align="center">
+<p>
+  <img src="https://img.shields.io/badge/Full_Stack-React-61DAFB?style=flat-square&logo=react" alt="React"/>
+  <img src="https://img.shields.io/badge/Backend-Node.js-339933?style=flat-square&logo=node.js" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/Database-PostgreSQL-336791?style=flat-square&logo=postgresql" alt="PostgreSQL"/>
+  <img src="https://img.shields.io/badge/Language-TypeScript-007ACC?style=flat-square&logo=typescript" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/API-REST-25D366?style=flat-square" alt="REST API"/>
+  <img src="https://img.shields.io/badge/Design-Responsive-FF6B6B?style=flat-square" alt="Responsive"/>
+</p>
+<p>
+  <img src="https://img.shields.io/badge/Game-Uma_Musume-FF69B4?style=flat-square" alt="Uma Musume"/>
+  <img src="https://img.shields.io/badge/Game-Pretty_Derby-FF1493?style=flat-square" alt="Pretty Derby"/>
+  <img src="https://img.shields.io/badge/Type-Database-4169E1?style=flat-square" alt="Database"/>
+  <img src="https://img.shields.io/badge/Feature-Collection_Tracker-32CD32?style=flat-square" alt="Tracker"/>
+  <img src="https://img.shields.io/badge/Platform-Web-FF4500?style=flat-square" alt="Web"/>
+</p>
+</div>
+
+---
+
+<div align="center">
 
 ## 📝 Development Notes
 
-### **Project Structure**
+<details>
+<summary>📁 <strong>Project Structure</strong></summary>
+
 ```
 📁 uma-notes/ (Frontend)
-├── 📁 src/components/      # Reusable UI components
-├── 📁 src/pages/          # Route-level pages  
-├── 📁 src/api/            # API layer & React Query hooks
-├── 📁 src/types/          # TypeScript definitions
-└── 📁 src/constants/      # App constants
+├── 📁 src/
+│   ├── 📁 components/      # 🎨 Reusable UI components
+│   ├── 📁 pages/          # 📄 Route-level pages  
+│   ├── 📁 api/            # 🔌 API layer & React Query hooks
+│   ├── 📁 types/          # 📝 TypeScript definitions
+│   └── 📁 constants/      # ⚙️ App constants
 
 📁 node-uma-notes-be/ (Backend)  
-├── 📁 controllers/        # Route handlers
-├── 📁 models/            # Sequelize models
-├── 📁 routes/            # API route definitions
-├── 📁 services/          # Business logic layer
-├── 📁 seeders/           # Database seeding
-└── 📁 public/uploads/    # File upload storage
+├── 📁 controllers/        # 🎮 Route handlers
+├── 📁 models/            # 🗄️ Sequelize models
+├── 📁 routes/            # 🛣️ API route definitions
+├── 📁 services/          # ⚙️ Business logic layer
+├── 📁 seeders/           # 🌱 Database seeding
+└── 📁 public/uploads/    # 📁 File upload storage
 ```
 
-### **API Response Format**
+</details>
+
+<details>
+<summary>📊 <strong>API Response Format</strong></summary>
+
 ```json
 {
   "meta": {
@@ -293,42 +513,86 @@ AUTO_SEED=false
 }
 ```
 
+</details>
+
+</div>
+
 ---
 
-**Happy Coding! 🐎✨**
+<div align="center">
+
+**🎉 Happy Coding! 🐎✨**
+
+<p>
+  <a href="https://github.com/zakkutsu">
+    <img src="https://img.shields.io/badge/Made_with_❤️_by-Zakkutsu-FF6B6B?style=for-the-badge" alt="Made with love"/>
+  </a>
+</p>
+
+</div>
 
 ---
 
 # 🐎 Uma Musume Notes (English)
 
-**Uma Musume Notes** is a comprehensive online database platform dedicated to the **Uma Musume Pretty Derby** game. This application consists of a modern React frontend and REST API backend that provides a complex character, skill, support card, and inheritance system management.
+> **Uma Musume Notes** is a comprehensive online database platform dedicated to the **Uma Musume Pretty Derby** game. This application consists of a modern React frontend and REST API backend that work seamlessly together!
+
+<details>
+<summary>📋 <strong>Table of Contents</strong></summary>
+
+- [🎯 Objectives](#-objectives-1)
+- [🏗️ System Architecture](#️-system-architecture-1)
+- [📂 Repositories](#-repositories-1)
+- [🚀 Tech Stack](#-tech-stack-1)
+- [✨ Main Features](#-main-features)
+- [⚙️ How to Run](#️-how-to-run-the-project)
+
+</details>
 
 ## 🎯 Objectives
 
 Building an **easily searchable and informative Uma Musume database website** with features:
 
-- **Online Database**: Centralized storage system for all Uma Musume data
-- **Collection Tracker**: Intuitive interface for tracking progress and personal collections
-- **Structured API**: Scalable and easily consumable REST API
-- **Responsive Design**: Optimized for desktop and mobile devices
-- **Real-time Updates**: Frontend-backend integration for current data
+<div align="center">
+<table>
+<tr>
+<td align="center" width="25%">
+  <strong>🗄️ Online Database</strong><br/>
+  <sub>Centralized storage system</sub>
+</td>
+<td align="center" width="25%">
+  <strong>📊 Collection Tracker</strong><br/>
+  <sub>Intuitive progress interface</sub>
+</td>
+<td align="center" width="25%">
+  <strong>🔌 Structured API</strong><br/>
+  <sub>Scalable REST API</sub>
+</td>
+<td align="center" width="25%">
+  <strong>📱 Responsive Design</strong><br/>
+  <sub>Optimized for all devices</sub>
+</td>
+</tr>
+</table>
+</div>
 
 ## 🏗️ System Architecture
 
+<div align="center">
+
+```mermaid
+graph LR
+    A[👤 User] --> B[🎨 Frontend<br/>React + Vite<br/>Port: 5173]
+    B --> C[⚙️ Backend<br/>Node.js + Express<br/>Port: 3000]
+    C --> D[🗄️ Database<br/>PostgreSQL<br/>Port: 5432]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
 ```
-┌─────────────────────────┐    HTTP/REST API    ┌─────────────────────────┐    SQL Queries    ┌─────────────────────────┐
-│                         │ ◄─────────────────► │                         │ ◄───────────────► │                         │
-│       Frontend          │                     │        Backend          │                   │       Database          │
-│    (React + Vite)       │                     │  (Node.js + Express)    │                   │      (PostgreSQL)       │
-│                         │                     │                         │                   │                         │
-│  • React 19 + TypeScript│                     │  • REST API Endpoints   │                   │  • Normalized Schema    │
-│  • Tailwind CSS         │                     │  • Sequelize ORM        │                   │  • ERD Compliant        │
-│  • React Query          │                     │  • Auto Seeding         │                   │  • Junction Tables      │
-│  • Responsive Design    │                     │  • Image Upload         │                   │  • Foreign Keys         │
-│                         │                     │                         │                   │                         │
-│  Port: 5173 (dev)       │                     │  Port: 3000             │                   │  Port: 5432             │
-└─────────────────────────┘                     └─────────────────────────┘                   └─────────────────────────┘
-```
+
+</div>
 
 **Data Flow:**
 1. User interacts with React frontend
@@ -340,69 +604,117 @@ Building an **easily searchable and informative Uma Musume database website** wi
 
 ## 📂 Repositories
 
-- 🎨 **Frontend**: [uma-notes](https://github.com/zakkutsu/uma-notes-fe.git) *(This Repository)*
-- ⚙️ **Backend**: [uma-notes-be](https://github.com/zakkutsu/uma-notes-be.git)
+<div align="center">
+<table>
+<tr>
+<td align="center">
+  <a href="https://github.com/zakkutsu/uma-notes-fe.git">
+    <img src="https://img.shields.io/badge/🎨_Frontend-uma--notes--fe-blueviolet?style=for-the-badge&logo=github" alt="Frontend"/>
+  </a>
+  <br><sub><em>This Repository</em></sub>
+</td>
+<td align="center">
+  <a href="https://github.com/zakkutsu/uma-notes-be.git">
+    <img src="https://img.shields.io/badge/⚙️_Backend-uma--notes--be-orange?style=for-the-badge&logo=github" alt="Backend"/>
+  </a>
+</td>
+</tr>
+</table>
+</div>
 
 ## 🚀 Tech Stack
 
-### **Frontend** (This Repository)
-- **Framework**: React 19 with TypeScript
-- **Build Tool**: Vite 7 for super fast development
-- **Styling**: Tailwind CSS 4 with custom design system
-- **State Management**: React Query (TanStack Query) for server state
-- **Routing**: React Router DOM for navigation
-- **HTTP Client**: Axios for API communication
+<div align="center">
 
-### **Backend**
-- **Runtime**: Node.js with Express.js
-- **Database**: PostgreSQL with Sequelize ORM
-- **Upload**: Multer for file handling
-- **Development**: Nodemon for hot reload
-- **Containerization**: Docker Compose for PostgreSQL
+### 🎨 Frontend (This Repository)
+<p>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react" alt="React"/>
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite" alt="Vite"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=flat-square&logo=tailwind-css" alt="Tailwind"/>
+  <img src="https://img.shields.io/badge/React_Query-FF4154?style=flat-square&logo=react-query" alt="React Query"/>
+</p>
 
-### **Database**
-- **PostgreSQL**: Production-grade database
-- **Sequelize ORM**: Advanced query capabilities with auto-migration
-- **ERD Compliant**: Normalized schema without redundancy
-- **Auto Seeding**: Automatic data population system for development
+### ⚙️ Backend
+<p>
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express" alt="Express"/>
+  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql" alt="PostgreSQL"/>
+  <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat-square&logo=sequelize" alt="Sequelize"/>
+</p>
+
+</div>
 
 ## ✨ Main Features
 
-### **🗄️ Comprehensive Database**
-- **5+ Uma Characters** with complete 16 aptitude types (Speed, Stamina, Power, Guts, Wit)
-- **Skills Database** with rarity system (Normal/Rare/Unique) and 9 skill types
-- **Support Cards** with tier system (SSR/SR/R) and various card types
-- **Inheritance Factors** with color coding (Blue/Red/Green/White/Rainbow) & star ratings
-
-### **🎨 Modern Frontend**
-- **Homepage**: Database explorer with featured items and search functionality
-- **Collection Tracker**: Personal collection management with statistics
-- **Responsive Design**: Mobile-first approach with breakpoint optimization
-- **Smooth Animations**: CSS transitions and smooth hover effects
-
-### **🔌 Powerful Backend API**
-- **RESTful Endpoints**: Standard HTTP methods for all entities
-- **Smart Auto Seeder**: Duplicate prevention with environment control
-- **Image Management**: Polymorphic relations for all entities
-- **Production Ready**: Robust error handling with standardized responses
+<div align="center">
+<table>
+<tr>
+<td align="center" width="33%">
+  <h3>🗄️ Comprehensive Database</h3>
+  <ul align="left">
+    <li>🐎 <strong>5+ Uma Characters</strong> with 16 aptitude types</li>
+    <li>⚡ <strong>Skills Database</strong> with rarity system</li>
+    <li>🃏 <strong>Support Cards</strong> with tier system</li>
+    <li>🧬 <strong>Inheritance Factors</strong> with color coding</li>
+  </ul>
+</td>
+<td align="center" width="33%">
+  <h3>🎨 Modern Frontend</h3>
+  <ul align="left">
+    <li>🏠 <strong>Homepage</strong> with database explorer</li>
+    <li>📊 <strong>Collection Tracker</strong> personal management</li>
+    <li>📱 <strong>Responsive Design</strong> mobile-first</li>
+    <li>✨ <strong>Smooth Animations</strong> CSS transitions</li>
+  </ul>
+</td>
+<td align="center" width="33%">
+  <h3>🔌 Powerful Backend API</h3>
+  <ul align="left">
+    <li>🌐 <strong>RESTful Endpoints</strong> standard HTTP</li>
+    <li>🤖 <strong>Smart Auto Seeder</strong> duplicate prevention</li>
+    <li>🖼️ <strong>Image Management</strong> polymorphic relations</li>
+    <li>🚀 <strong>Production Ready</strong> robust error handling</li>
+  </ul>
+</td>
+</tr>
+</table>
+</div>
 
 ## ⚙️ How to Run the Project
 
-### **Prerequisites**
-- Node.js v18+
-- Docker & Docker Compose (for PostgreSQL)
-- npm or yarn
+### 📋 Prerequisites
 
-### **1. Backend Setup**
+<div align="center">
+<table>
+<tr>
+<td align="center">
+  <img src="https://img.shields.io/badge/Node.js-v18+-339933?style=for-the-badge&logo=node.js" alt="Node.js"/>
+</td>
+<td align="center">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker" alt="Docker"/>
+</td>
+<td align="center">
+  <img src="https://img.shields.io/badge/npm/yarn-CB3837?style=for-the-badge&logo=npm" alt="npm"/>
+</td>
+</tr>
+</table>
+</div>
+
+### 🚀 Quick Start
+
+<details>
+<summary>⚙️ <strong>1. Backend Setup</strong></summary>
+
 ```bash
-# Clone backend repository
+# 📥 Clone backend repository
 git clone https://github.com/zakkutsu/uma-notes-be.git
 cd uma-notes-be
 
-# Install dependencies
+# 📦 Install dependencies
 npm install
 
-# Setup environment (.env)
+# ⚙️ Setup environment (.env)
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=uma_notes_db
@@ -411,68 +723,108 @@ DB_PASSWORD=your_password
 PORT=3000
 AUTO_SEED=true
 
-# Start PostgreSQL with Docker
+# 🐳 Start PostgreSQL with Docker
 docker-compose up -d
 
-# Run backend
+# 🚀 Run backend
 npm run dev
-# Backend runs at http://localhost:3000
+# 🌐 Backend runs at http://localhost:3000
 ```
 
-### **2. Frontend Setup**
+</details>
+
+<details>
+<summary>🎨 <strong>2. Frontend Setup</strong></summary>
+
 ```bash
-# Clone frontend repository  
+# 📥 Clone frontend repository  
 git clone https://github.com/zakkutsu/uma-notes-fe.git
 cd uma-notes-fe
 
-# Install dependencies
+# 📦 Install dependencies
 npm install
 
-# Setup environment (.env)
+# ⚙️ Setup environment (.env)
 VITE_API_BASE_URL=http://localhost:3000/api/v1
 VITE_APP_TITLE=Uma Musume Notes
 
-# Run frontend
+# 🚀 Run frontend
 npm run dev
-# Frontend runs at http://localhost:5173
+# 🌐 Frontend runs at http://localhost:5173
 ```
+
+</details>
 
 ---
 
-**Happy Coding! 🐎✨**
+<div align="center">
+
+**🎉 Happy Coding! 🐎✨**
+
+</div>
 
 ---
 
 # 🐎 Uma Musume Notes (Japanese)
 
-**Uma Musume Notes** は、**ウマ娘 プリティーダービー** ゲーム専用の包括的なオンラインデータベースプラットフォームです。このアプリケーションは、モダンなReactフロントエンドと、キャラクター、スキル、サポートカード、継承システムの複雑な管理を提供するREST APIバックエンドで構成されています。
+> **Uma Musume Notes** は、**ウマ娘 プリティーダービー** ゲーム専用の包括的なオンラインデータベースプラットフォームです。このアプリケーションは、モダンなReactフロントエンドと強力なREST APIバックエンドで構成されています！
+
+<details>
+<summary>📋 <strong>目次</strong></summary>
+
+- [🎯 目標](#-目標-1)
+- [🏗️ システムアーキテクチャ](#️-システムアーキテクチャ-1)
+- [📂 リポジトリ](#-リポジトリ-1)
+- [🚀 技術スタック](#-技術スタック-1)
+- [✨ 主な機能](#-主な機能)
+- [⚙️ プロジェクトの実行方法](#️-プロジェクトの実行方法-1)
+
+</details>
 
 ## 🎯 目標
 
 以下の機能を持つ**検索しやすく情報豊富なウマ娘データベースウェブサイト**の構築：
 
-- **オンラインデータベース**: すべてのウマ娘データの集中ストレージシステム
-- **コレクショントラッカー**: 進捗と個人コレクションを追跡する直感的なインターフェース
-- **構造化API**: スケーラブルで簡単に利用できるREST API
-- **レスポンシブデザイン**: デスクトップとモバイルデバイス向けに最適化
-- **リアルタイム更新**: 最新データのためのフロントエンド・バックエンド統合
+<div align="center">
+<table>
+<tr>
+<td align="center" width="25%">
+  <strong>🗄️ オンラインデータベース</strong><br/>
+  <sub>集中ストレージシステム</sub>
+</td>
+<td align="center" width="25%">
+  <strong>📊 コレクショントラッカー</strong><br/>
+  <sub>直感的な進捗インターフェース</sub>
+</td>
+<td align="center" width="25%">
+  <strong>🔌 構造化API</strong><br/>
+  <sub>スケーラブルなREST API</sub>
+</td>
+<td align="center" width="25%">
+  <strong>📱 レスポンシブデザイン</strong><br/>
+  <sub>全デバイス最適化</sub>
+</td>
+</tr>
+</table>
+</div>
 
 ## 🏗️ システムアーキテクチャ
 
+<div align="center">
+
+```mermaid
+graph LR
+    A[👤 ユーザー] --> B[🎨 フロントエンド<br/>React + Vite<br/>ポート: 5173]
+    B --> C[⚙️ バックエンド<br/>Node.js + Express<br/>ポート: 3000]
+    C --> D[🗄️ データベース<br/>PostgreSQL<br/>ポート: 5432]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
 ```
-┌─────────────────────────┐    HTTP/REST API    ┌─────────────────────────┐    SQL Queries    ┌─────────────────────────┐
-│                         │ ◄─────────────────► │                         │ ◄───────────────► │                         │
-│      フロントエンド      │                     │       バックエンド       │                   │      データベース        │
-│    (React + Vite)       │                     │  (Node.js + Express)    │                   │      (PostgreSQL)       │
-│                         │                     │                         │                   │                         │
-│  • React 19 + TypeScript│                     │  • REST API エンドポイント│                   │  • 正規化スキーマ        │
-│  • Tailwind CSS         │                     │  • Sequelize ORM        │                   │  • ERD 準拠             │
-│  • React Query          │                     │  • 自動シーディング       │                   │  • ジャンクションテーブル │
-│  • レスポンシブデザイン   │                     │  • 画像アップロード       │                   │  • 外部キー             │
-│                         │                     │                         │                   │                         │
-│  ポート: 5173 (dev)      │                     │  ポート: 3000            │                   │  ポート: 5432           │
-└─────────────────────────┘                     └─────────────────────────┘                   └─────────────────────────┘
-```
+
+</div>
 
 **データフロー:**
 1. ユーザーがReactフロントエンドと対話
@@ -480,73 +832,121 @@ npm run dev
 3. バックエンドがリクエストを処理し、PostgreSQLと通信
 4. データベースがSequelize ORMを通じてデータを返す
 5. バックエンドがフロントエンドにJSONレスポンスを送信
-6. React Queryがキャッシュとこのが交換
+6. React Queryがキャッシュとライキングするように更新
 
 ## 📂 リポジトリ
 
-- 🎨 **フロントエンド**: [uma-notes](https://github.com/zakkutsu/uma-notes-fe.git) *(このリポジトリ)*
-- ⚙️ **バックエンド**: [uma-notes-be](https://github.com/zakkutsu/uma-notes-be.git)
+<div align="center">
+<table>
+<tr>
+<td align="center">
+  <a href="https://github.com/zakkutsu/uma-notes-fe.git">
+    <img src="https://img.shields.io/badge/🎨_フロントエンド-uma--notes--fe-blueviolet?style=for-the-badge&logo=github" alt="Frontend"/>
+  </a>
+  <br><sub><em>このリポジトリ</em></sub>
+</td>
+<td align="center">
+  <a href="https://github.com/zakkutsu/uma-notes-be.git">
+    <img src="https://img.shields.io/badge/⚙️_バックエンド-uma--notes--be-orange?style=for-the-badge&logo=github" alt="Backend"/>
+  </a>
+</td>
+</tr>
+</table>
+</div>
 
 ## 🚀 技術スタック
 
-### **フロントエンド** (このリポジトリ)
-- **フレームワーク**: React 19 with TypeScript
-- **ビルドツール**: Vite 7 for 超高速開発
-- **スタイリング**: Tailwind CSS 4 with カスタムデザインシステム
-- **状態管理**: React Query (TanStack Query) for サーバー状態
-- **ルーティング**: React Router DOM for ナビゲーション
-- **HTTPクライアント**: Axios for API通信
+<div align="center">
 
-### **バックエンド**
-- **ランタイム**: Node.js with Express.js
-- **データベース**: PostgreSQL with Sequelize ORM
-- **アップロード**: Multer for ファイル処理
-- **開発**: Nodemon for ホットリロード
-- **コンテナ化**: Docker Compose for PostgreSQL
+### 🎨 フロントエンド (このリポジトリ)
+<p>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react" alt="React"/>
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite" alt="Vite"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=flat-square&logo=tailwind-css" alt="Tailwind"/>
+  <img src="https://img.shields.io/badge/React_Query-FF4154?style=flat-square&logo=react-query" alt="React Query"/>
+</p>
 
-### **データベース**
-- **PostgreSQL**: プロダクション級データベース
-- **Sequelize ORM**: 自動マイグレーション付き高度クエリ機能
-- **ERD準拠**: 冗長性のない正規化スキーマ
-- **自動シーディング**: 開発用自動データ投入システム
+### ⚙️ バックエンド
+<p>
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express" alt="Express"/>
+  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql" alt="PostgreSQL"/>
+  <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat-square&logo=sequelize" alt="Sequelize"/>
+</p>
+
+</div>
 
 ## ✨ 主な機能
 
-### **🗄️ 包括的データベース**
-- **5+ウマ娘キャラクター** 16適性タイプ完全対応 (スピード、スタミナ、パワー、根性、賢さ)
-- **スキルデータベース** レアリティシステム付き (ノーマル/レア/固有) と9スキルタイプ
-- **サポートカード** ティアシステム (SSR/SR/R) と様々なカードタイプ
-- **継承ファクター** カラーコーディング (青/赤/緑/白/虹) & 星評価
-
-### **🎨 モダンフロントエンド**
-- **ホームページ**: 注目アイテムと検索機能付きデータベースエクスプローラー
-- **コレクショントラッカー**: 統計付き個人コレクション管理
-- **レスポンシブデザイン**: ブレークポイント最適化によるモバイルファースト
-- **スムーズアニメーション**: CSSトランジションと滑らかなホバー効果
-
-### **🔌 強力なバックエンドAPI**
-- **RESTfulエンドポイント**: すべてのエンティティに対する標準HTTPメソッド
-- **スマート自動シーダー**: 環境制御による重複防止
-- **画像管理**: すべてのエンティティのためのポリモーフィックリレーション
-- **プロダクション対応**: 標準化レスポンスによる堅牢エラーハンドリング
+<div align="center">
+<table>
+<tr>
+<td align="center" width="33%">
+  <h3>🗄️ 包括的データベース</h3>
+  <ul align="left">
+    <li>🐎 <strong>5+ウマ娘キャラクター</strong> 16適性タイプ完全対応</li>
+    <li>⚡ <strong>スキルデータベース</strong> レアリティシステム付き</li>
+    <li>🃏 <strong>サポートカード</strong> ティアシステム付き</li>
+    <li>🧬 <strong>継承ファクター</strong> カラーコーディング付き</li>
+  </ul>
+</td>
+<td align="center" width="33%">
+  <h3>🎨 モダンフロントエンド</h3>
+  <ul align="left">
+    <li>🏠 <strong>ホームページ</strong> データベースエクスプローラー付き</li>
+    <li>📊 <strong>コレクショントラッカー</strong> 個人管理</li>
+    <li>📱 <strong>レスポンシブデザイン</strong> モバイルファースト</li>
+    <li>✨ <strong>スムーズアニメーション</strong> CSSトランジション</li>
+  </ul>
+</td>
+<td align="center" width="33%">
+  <h3>🔌 強力なバックエンドAPI</h3>
+  <ul align="left">
+    <li>🌐 <strong>RESTfulエンドポイント</strong> 標準HTTP</li>
+    <li>🤖 <strong>スマート自動シーダー</strong> 重複防止</li>
+    <li>🖼️ <strong>画像管理</strong> ポリモーフィックリレーション</li>
+    <li>🚀 <strong>プロダクション対応</strong> 堅牢エラーハンドリング</li>
+  </ul>
+</td>
+</tr>
+</table>
+</div>
 
 ## ⚙️ プロジェクトの実行方法
 
-### **前提条件**
-- Node.js v18+
-- Docker & Docker Compose (PostgreSQL用)
-- npm または yarn
+### 📋 前提条件
 
-### **1. バックエンドセットアップ**
+<div align="center">
+<table>
+<tr>
+<td align="center">
+  <img src="https://img.shields.io/badge/Node.js-v18+-339933?style=for-the-badge&logo=node.js" alt="Node.js"/>
+</td>
+<td align="center">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker" alt="Docker"/>
+</td>
+<td align="center">
+  <img src="https://img.shields.io/badge/npm/yarn-CB3837?style=for-the-badge&logo=npm" alt="npm"/>
+</td>
+</tr>
+</table>
+</div>
+
+### 🚀 クイックスタート
+
+<details>
+<summary>⚙️ <strong>1. バックエンドセットアップ</strong></summary>
+
 ```bash
-# バックエンドリポジトリをクローン
+# 📥 バックエンドリポジトリをクローン
 git clone https://github.com/zakkutsu/uma-notes-be.git
 cd uma-notes-be
 
-# 依存関係をインストール
+# 📦 依存関係をインストール
 npm install
 
-# 環境設定 (.env)
+# ⚙️ 環境設定 (.env)
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=uma_notes_db
@@ -555,33 +955,42 @@ DB_PASSWORD=your_password
 PORT=3000
 AUTO_SEED=true
 
-# DockerでPostgreSQLを起動
+# 🐳 DockerでPostgreSQLを起動
 docker-compose up -d
 
-# バックエンドを実行
+# 🚀 バックエンドを実行
 npm run dev
-# バックエンドは http://localhost:3000 で動作
+# 🌐 バックエンドは http://localhost:3000 で動作
 ```
 
-### **2. フロントエンドセットアップ**
+</details>
+
+<details>
+<summary>🎨 <strong>2. フロントエンドセットアップ</strong></summary>
+
 ```bash
-# フロントエンドリポジトリをクローン
+# 📥 フロントエンドリポジトリをクローン
 git clone https://github.com/zakkutsu/uma-notes-fe.git
 cd uma-notes-fe
 
-# 依存関係をインストール
+# 📦 依存関係をインストール
 npm install
 
-# 環境設定 (.env)
+# ⚙️ 環境設定 (.env)
 VITE_API_BASE_URL=http://localhost:3000/api/v1
 VITE_APP_TITLE=Uma Musume Notes
 
-# フロントエンドを実行
+# 🚀 フロントエンドを実行
 npm run dev
-# フロントエンドは http://localhost:5173 で動作
+# 🌐 フロントエンドは http://localhost:5173 で動作
 ```
+
+</details>
 
 ---
 
-**Happy Coding! 🐎✨**
+<div align="center">
 
+**🎉 Happy Coding! 🐎✨**
+
+</div>
