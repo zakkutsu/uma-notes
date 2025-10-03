@@ -1,70 +1,102 @@
+@import "tailwindcss";
+
+/* Uma Notes Global Styles */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --uma-blue: #3b82f6;
+  --uma-purple: #8b5cf6;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #f9fafb;
+  color: #111827;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Container utility */
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Text shadow utility */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Card utilities */
+.card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+}
+
+.card-hover-effect {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.card-hover-effect:hover {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  transform: translateY(-0.5rem);
+}
+
+/* Tag background colors */
+.bg-speed-tag { background-color: #ef4444; }
+.bg-stamina-tag { background-color: #f97316; }
+.bg-power-tag { background-color: #eab308; }
+.bg-guts-tag { background-color: #84cc16; }
+.bg-intellect-tag { background-color: #22c55e; }
+.bg-friend-tag { background-color: #3b82f6; }
+.bg-unique-tag { background-color: #a855f7; }
+
+/* Uma brand colors */
+.bg-uma-blue { background-color: var(--uma-blue); }
+.bg-uma-purple { background-color: var(--uma-purple); }
+.text-uma-blue { color: var(--uma-blue); }
+
+/* Gradient utilities */
+.from-uma-blue {
+  --tw-gradient-from: var(--uma-blue);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0));
+}
+
+.to-uma-purple {
+  --tw-gradient-to: var(--uma-purple);
+}
+
+/* Button action utility */
+.btn-action {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
   color: white;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: transform 0.2s ease-in-out;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-    color: #213547;
-  }
+.btn-action:active {
+  transform: scale(0.95);
 }
