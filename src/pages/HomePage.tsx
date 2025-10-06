@@ -7,9 +7,13 @@ import {
   featuredFactors,
   homeSectionIdToNavMap 
 } from '../constants';
-import type { PageProps } from '../types';
+import type { PageProps, Uma, SupportCard, Skill, Factor, TrainedUma } from '../types';
 
-export const HomePage: React.FC<PageProps> = ({ onNavigate, setActiveNav }) => {
+interface HomePageProps extends PageProps {
+  onViewAll: (type: 'uma' | 'support-card' | 'skill' | 'factor' | 'trained-uma', items?: (Uma | SupportCard | Skill | Factor | TrainedUma)[]) => void;
+}
+
+export const HomePage: React.FC<HomePageProps> = ({ onNavigate, setActiveNav, onViewAll }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -58,9 +62,12 @@ export const HomePage: React.FC<PageProps> = ({ onNavigate, setActiveNav }) => {
         <section id="featured-uma-musume" className="mb-12 sm:mb-16">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 gap-4">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">⭐ Featured Uma</h2>
-            <a href="#" className="text-blue-500 hover:text-blue-600 text-lg font-medium transition-colors no-underline">
+            <button 
+              onClick={() => onViewAll('uma')}
+              className="text-blue-500 hover:text-blue-600 text-lg font-medium transition-colors cursor-pointer hover:underline"
+            >
               View All →
-            </a>
+            </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {featuredUmas.map(uma => <UmaCard key={uma.id} {...uma} />)}
@@ -70,9 +77,12 @@ export const HomePage: React.FC<PageProps> = ({ onNavigate, setActiveNav }) => {
         <section id="featured-support-cards" className="mb-12 sm:mb-16">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 gap-4">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">🃏 Featured Support Cards</h2>
-            <a href="#" className="text-blue-500 hover:text-blue-600 text-lg font-medium transition-colors no-underline">
+            <button 
+              onClick={() => onViewAll('support-card')}
+              className="text-blue-500 hover:text-blue-600 text-lg font-medium transition-colors cursor-pointer hover:underline"
+            >
               View All →
-            </a>
+            </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {featuredSupportCards.map(card => <SupportCardCard key={card.id} {...card} />)}
@@ -82,9 +92,12 @@ export const HomePage: React.FC<PageProps> = ({ onNavigate, setActiveNav }) => {
         <section id="featured-skills" className="mb-12 sm:mb-16">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 gap-4">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">✨ Featured Skills</h2>
-            <a href="#" className="text-blue-500 hover:text-blue-600 text-lg font-medium transition-colors no-underline">
+            <button 
+              onClick={() => onViewAll('skill')}
+              className="text-blue-500 hover:text-blue-600 text-lg font-medium transition-colors cursor-pointer hover:underline"
+            >
               View All →
-            </a>
+            </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {featuredSkills.map(skill => <SkillCard key={skill.id} {...skill} />)}
@@ -94,9 +107,12 @@ export const HomePage: React.FC<PageProps> = ({ onNavigate, setActiveNav }) => {
         <section id="featured-factors" className="mb-12 sm:mb-16">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 gap-4">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">🧬 Featured Factors</h2>
-            <a href="#" className="text-blue-500 hover:text-blue-600 text-lg font-medium transition-colors no-underline">
+            <button 
+              onClick={() => onViewAll('factor')}
+              className="text-blue-500 hover:text-blue-600 text-lg font-medium transition-colors cursor-pointer hover:underline"
+            >
               View All →
-            </a>
+            </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {featuredFactors.map(factor => <FactorCard key={factor.id} {...factor} />)}

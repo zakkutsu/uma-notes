@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { MainLayout } from './layout';
 import { HomePage, ProgressTrackerPage, ViewAllPage } from './pages';
 import { getAppId } from './utils';
+import { featuredUmas, featuredSupportCards, featuredSkills, featuredFactors } from './constants';
 import type { Page, Uma, SupportCard, Skill, Factor, TrainedUma } from './types';
 // import { onAuthStateChanged, User } from 'firebase/auth'; // Uncomment when Firebase is installed
 
@@ -15,7 +16,8 @@ export default function App() {
   const [viewAllState, setViewAllState] = useState<{
     type: 'uma' | 'support-card' | 'skill' | 'factor' | 'trained-uma' | null;
     items: (Uma | SupportCard | Skill | Factor | TrainedUma)[];
-  }>({ type: null, items: [] });
+    fromPage: 'home' | 'progress';
+  }>({ type: null, items: [], fromPage: 'progress' });
   
   useEffect(() => {
     // Firebase initialization will be added later when needed
@@ -38,8 +40,34 @@ export default function App() {
     setCurrentPage(page);
   };
 
-  const navigateToViewAll = (type: 'uma' | 'support-card' | 'skill' | 'factor' | 'trained-uma', items: (Uma | SupportCard | Skill | Factor | TrainedUma)[]) => {
-    setViewAllState({ type, items });
+  const navigateToViewAll = (type: 'uma' | 'support-card' | 'skill' | 'factor' | 'trained-uma', items?: (Uma | SupportCard | Skill | Factor | TrainedUma)[]) => {
+    // If no items provided, use default featured data (for homepage)
+    let dataToShow: (Uma | SupportCard | Skill | Factor | TrainedUma)[] = [];
+    const fromPage = items ? 'progress' : 'home';
+    
+    if (items) {
+      dataToShow = items;
+    } else {
+      // Use featured data for homepage view all
+      switch (type) {
+        case 'uma':
+          dataToShow = [...featuredUmas, ...featuredUmas.map(uma => ({ ...uma, id: uma.id + 100 }))];
+          break;
+        case 'support-card':
+          dataToShow = [...featuredSupportCards, ...featuredSupportCards.map(card => ({ ...card, id: card.id + 100 }))];
+          break;
+        case 'skill':
+          dataToShow = [...featuredSkills, ...featuredSkills.map(skill => ({ ...skill, id: skill.id + 100 }))];
+          break;
+        case 'factor':
+          dataToShow = [...featuredFactors, ...featuredFactors.map(factor => ({ ...factor, id: factor.id + 100 }))];
+          break;
+        default:
+          dataToShow = [];
+      }
+    }
+    
+    setViewAllState({ type, items: dataToShow, fromPage });
     setCurrentPage('view-all');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -77,12 +105,16 @@ export default function App() {
   return (
     <MainLayout headerProps={headerProps}>
       {currentPage === 'home' ? (
-        <HomePage onNavigate={navigateTo} setActiveNav={setActiveNav} />
+        <HomePage 
+          onNavigate={navigateTo} 
+          setActiveNav={setActiveNav} 
+          onViewAll={navigateToViewAll}
+        />
       ) : currentPage === 'view-all' && viewAllState.type ? (
         <ViewAllPage
           type={viewAllState.type}
           items={viewAllState.items}
-          onBack={() => navigateTo('progress')}
+          onBack={() => navigateTo(viewAllState.fromPage === 'home' ? 'home' : 'progress')}
           onAddItem={handleAddItem}
         />
       ) : (
